@@ -1,7 +1,7 @@
 
 @import Glassfy;
 
-typedef void (^GlassfyGlueCompletion)(NSDictionary *_Nullable, NSError *_Nullable);
+typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString*,id> *_Nullable, NSError *_Nullable);
 
 @interface GlassfyGlue: NSObject
 
