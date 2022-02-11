@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Public/*.h','Sources/*.{h,m}'
   
   s.public_header_files = 'Public/*.h'
-  s.dependency 'Glassfy', s.version.to_s
+  s.dependency 'Glassfy', '1.1.7'
 end
