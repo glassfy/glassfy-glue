@@ -1,5 +1,5 @@
 
-@import Glassfy;
+#import <Glassfy/Glassfy.h>
 
 typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString*,id> *_Nullable, NSError *_Nullable);
 

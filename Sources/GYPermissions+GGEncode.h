@@ -4,9 +4,7 @@
 //
 //
 
-@import Glassfy;
-
-
+#import "GlassfyGlue.h"
 #import "GGCodableProtocol.h"
 
 
