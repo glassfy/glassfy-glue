@@ -1,3 +1,5 @@
+<img src="https://media.glassfy.io/banner_purple.png" />
+
 # GlassfyGlue
 
 [![Version](https://img.shields.io/cocoapods/v/GlassfyGlue.svg?style=flat)](https://cocoapods.org/pods/GlassfyGlue)
