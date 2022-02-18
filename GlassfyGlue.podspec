@@ -8,12 +8,12 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GlassfyGlue'
-  s.version          = '1.1.8'
+  s.version          = '1.1.70'
   s.summary          = 'Glassfy Glue'
 
   s.homepage         = 'https://github.com/glassfy/glassfy-glue.git'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'marcopifferi' => 'marco@piff.it' }
+  s.author           = { 'marcopifferi' => 'piff@glassfy.io' }
   s.source           = { :git => 'https://github.com/glassfy/glassfy-glue.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
