@@ -18,7 +18,7 @@
         [skus addObject:[sku encodedDictionary]];
     }
 
-    return @{@"identifier":self.identifier,@"skus":skus};
+    return @{@"offeringId":self.offeringId,@"skus":skus};
 }
 
 @end

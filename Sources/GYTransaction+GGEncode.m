@@ -14,7 +14,7 @@
    
     NSMutableDictionary *transaction = [[NSMutableDictionary alloc]init];
 
-    transaction[@"productIdentifier"] = self.productIdentifier;
+    transaction[@"productId"] = self.productId;
     transaction[@"receiptValidated"] = @(self.receiptValidated);
     transaction[@"permissions"] = [self.permissions encodedDictionary];
 

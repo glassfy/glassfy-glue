@@ -12,7 +12,7 @@
 {
     NSMutableDictionary *permission = [[NSMutableDictionary alloc]init];
     
-    permission[@"permissionIdentifier"] = self.permissionIdentifier;
+    permission[@"permissionId"] = self.permissionId;
     permission[@"entitlement"] = @(self.entitlement);
     permission[@"isValid"] = @(self.isValid);
     permission[@"expireDate"] = [self.expireDate ISO8601Date];

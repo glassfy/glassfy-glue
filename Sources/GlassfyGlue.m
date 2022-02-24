@@ -61,9 +61,9 @@
 
 }
 
-+ (void)skuWithIdentifier:(NSString *_Nonnull)skuid withCompletion:(GlassfyGlueCompletion _Nonnull )block
++ (void)skuWithId:(NSString *_Nonnull)skuid withCompletion:(GlassfyGlueCompletion _Nonnull )block
 {
-    [Glassfy skuWithIdentifier:skuid completion:^(GYSku *sku , NSError *error ) {
+    [Glassfy skuWithId:skuid completion:^(GYSku *sku , NSError *error ) {
         if (error != nil) {
             block(nil,error);
             return;
@@ -85,7 +85,7 @@
         block(nil,[GlassfyGlue errorWithCode:-42 description:@"invalid parameter"]);
         return;
     }
-    [Glassfy skuWithIdentifier:identifier completion:^(GYSku *sku , NSError *error ) {
+    [Glassfy skuWithId:identifier completion:^(GYSku *sku , NSError *error ) {
         if (error != nil) {
             block(nil,error);
             return;

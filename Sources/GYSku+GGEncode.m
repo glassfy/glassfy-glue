@@ -12,7 +12,7 @@
 {
     NSMutableDictionary *sku = [[NSMutableDictionary alloc]init];
     
-    sku[@"identifier"] = self.identifier;
+    sku[@"skuId"] = self.skuId;
     sku[@"productId"] = self.productId;
     sku[@"introductoryEligibility"] = @(self.introductoryEligibility);
     sku[@"promotionalEligibility"] = @(self.promotionalEligibility);
