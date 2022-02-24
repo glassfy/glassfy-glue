@@ -80,12 +80,12 @@
         block(nil,[GlassfyGlue errorWithCode:-42 description:@"invalid parameter"]);
         return;
     }
-    NSString *identifier = sku[@"identifier"];
-    if (identifier == nil) {
+    NSString *skuId = sku[@"skuId"];
+    if (skuId == nil) {
         block(nil,[GlassfyGlue errorWithCode:-42 description:@"invalid parameter"]);
         return;
     }
-    [Glassfy skuWithId:identifier completion:^(GYSku *sku , NSError *error ) {
+    [Glassfy skuWithId:skuId completion:^(GYSku *sku , NSError *error ) {
         if (error != nil) {
             block(nil,error);
             return;
