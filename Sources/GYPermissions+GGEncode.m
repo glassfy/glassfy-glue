@@ -14,7 +14,7 @@
     NSMutableDictionary *permissions = [[NSMutableDictionary alloc]init];
     
     permissions[@"originalApplicationVersion"] = self.originalApplicationVersion;
-    permissions[@"originalApplicationDate"] = [self.originalApplicationDate ISO8601Date];
+    permissions[@"originalApplicationDate"] = @([self.originalApplicationDate timeIntervalSince1970]);
     permissions[@"subscriberId"] = self.subscriberId;
     permissions[@"installationId"] = self.installationId;
     

@@ -15,7 +15,7 @@
     permission[@"permissionId"] = self.permissionId;
     permission[@"entitlement"] = @(self.entitlement);
     permission[@"isValid"] = @(self.isValid);
-    permission[@"expireDate"] = [self.expireDate ISO8601Date];
+    permission[@"expireDate"] = @([self.expireDate timeIntervalSince1970]);
     permission[@"accountableSkus"] = [self.accountableSkus allObjects];
     
     return permission;
