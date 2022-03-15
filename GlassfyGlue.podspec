@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GlassfyGlue'
-  s.version          = '1.1.83'
+  s.version          = '1.1.84'
   s.summary          = 'Glassfy Glue'
 
   s.homepage         = 'https://github.com/glassfy/glassfy-glue.git'
