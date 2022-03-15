@@ -5,6 +5,7 @@
 //
 
 #import "GYSku+GGEncode.h"
+#import "SKProduct+GGEncode.h"
 
 @implementation GYSku (GGEncode)
 
@@ -17,6 +18,7 @@
     sku[@"introductoryEligibility"] = @(self.introductoryEligibility);
     sku[@"promotionalEligibility"] = @(self.promotionalEligibility);
     sku[@"extravars"] = self.extravars;
+    sku[@"product"] = [self.product encodedDictionary];
     
     return sku;
 }
