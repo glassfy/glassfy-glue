@@ -25,7 +25,7 @@ Add the dependency to your module-level `build.gradle`:
 ```gradle
 dependencies {
     [...]
-    implementation 'io.glassfy:androidsdk:0.9.0'
+    implementation 'io.glassfy:androidglue:1.1.80'
 }
 ```
 
