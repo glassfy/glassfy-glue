@@ -5,6 +5,8 @@
 #import "GYSku+GGEncode.h"
 #import "GYTransaction+GGEncode.h"
 #import "GYUserProperties+GGEncode.h"
+#import "GYStoresInfo+GGEncode.h"
+#import "GYSkuBase+GGEncode.h"
 
 @implementation GlassfyGlue
 
@@ -49,18 +51,6 @@
     }];
 }
 
-
-+ (void)loginUser:(NSString *_Nonnull)userId withCompletion:(GlassfyGlueCompletion _Nonnull )block
-{
-    [Glassfy loginUser:userId withCompletion:[GlassfyGlue errorOnlyCompletion:block]];
-}
-
-+ (void)logoutUserWithCompletion:(GlassfyGlueCompletion _Nonnull )block;
-{
-    [Glassfy logoutWithCompletion:[GlassfyGlue errorOnlyCompletion:block]];
-
-}
-
 + (void)skuWithId:(NSString *_Nonnull)skuid withCompletion:(GlassfyGlueCompletion _Nonnull )block
 {
     [Glassfy skuWithId:skuid completion:^(GYSku *sku , NSError *error ) {
@@ -73,6 +63,19 @@
         block(retSku,nil);
     }];
 }
+
++ (void)skuWithId:(NSString *)skuid store:(GYStore)store completion:(GlassfyGlueCompletion _Nonnull )block
+{
+    [Glassfy skuWithId:skuid store:store completion:^(GYSkuBase * skuBase, NSError * error) {
+        if (error != nil) {
+            block(nil,error);
+            return;
+        }
+        NSDictionary *retSku = [skuBase encodedDictionary];
+        block(retSku,nil);
+    }];
+}
+
 
 + (void)purchaseSku:(NSDictionary *_Nonnull)sku withCompletion:(GlassfyGlueCompletion _Nonnull )block
 {
@@ -165,6 +168,44 @@
     };
 }
 
++ (void)connectPaddleLicenseKey:(NSString *)licenseKey completion:(GlassfyGlueCompletion _Nonnull )block {
+    [GlassfyGlue connectPaddleLicenseKey:licenseKey force:false completion:block];
+}
+
++ (void)connectPaddleLicenseKey:(NSString *)licenseKey force:(BOOL)force completion:(GlassfyGlueCompletion _Nonnull )block {
+    [Glassfy connectPaddleLicenseKey:licenseKey force:force completion:^(NSError *error) {
+        if (error != nil) {
+            block(nil,error);
+            return;
+        }
+    }];
+    block(nil,nil);
+
+}
+
++ (void)connectCustomSubscriber:(NSString *_Nullable)customId completion:(GlassfyGlueCompletion _Nonnull )block {
+    [Glassfy connectCustomSubscriber:customId completion:^(NSError * error) {
+        if (error != nil) {
+            block(nil,error);
+            return;
+        }
+
+    }];
+    block(nil,nil);
+
+}
+
++ (void)storeInfo:(GlassfyGlueCompletion _Nonnull )block {
+    [Glassfy storeInfo:^(GYStoresInfo * storeInfo, NSError * error) {
+        if (error != nil) {
+            block(nil,error);
+            return;
+        }
+        NSDictionary *infoStoreDict = [storeInfo encodedDictionary];
+        block(infoStoreDict,nil);
+
+    }];
+}
 
 
 @end
