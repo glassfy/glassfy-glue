@@ -1,0 +1,27 @@
+//
+//  GYSkuPaddle+GGEncode.m
+//  Glassfy
+//
+//
+
+#import "GYSkuBase+GGEncode.h"
+#import "GYSkuPaddle+GGEncode.h"
+
+@implementation GYSkuPaddle (GGEncode)
+
+- (id)encodedDictionary
+{
+    NSMutableDictionary *sku = [super encodedDictionary];
+    
+    sku[@"name"] = self.name;
+    sku[@"initialPrice"] = @(self.initialPrice.floatValue);
+    sku[@"initialPriceCode"] = self.initialPriceCode;
+    sku[@"extravars"] = self.extravars;
+    sku[@"recurringPrice"] = @(self.recurringPrice.floatValue);
+    sku[@"recurringPriceCode"] = self.recurringPriceCode;
+    sku[@"extravars"] = self.extravars;
+
+    return sku;
+}
+
+@end
