@@ -79,11 +79,10 @@ object GlassfyGlue {
   }
 
   fun skuWithIdAndStore(identifier: String,store:Int, callback: GlueCallback) {
-    var gyStore:Store = Store.PlayStore
-    when (store) {
-      Store.AppStore.value -> gyStore = Store.AppStore;
-      Store.PlayStore.value -> gyStore = Store.PlayStore;
-      Store.Paddle.value -> gyStore = Store.Paddle;
+    val gyStore = when (store) {
+      Store.AppStore.value -> Store.AppStore;
+      Store.PlayStore.value -> Store.PlayStore;
+      Store.Paddle.value -> Store.Paddle;
       else -> {
         callback(null, "invalid store")
         return
