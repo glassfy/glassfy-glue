@@ -148,8 +148,7 @@
 
 + (void)setEmailUserProperty:(NSString *)email
               withCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy setDeviceToken:email
-               completion:[GlassfyGlue errorOnlyCompletion:block]];
+  [Glassfy setEmailUserProperty:email completion:[GlassfyGlue errorOnlyCompletion:block]];
 }
 
 + (void)setExtraUserProperty:(NSDictionary *)extraProp
@@ -222,9 +221,7 @@
 + (void (^)(NSError *_Nullable))errorOnlyCompletion:
     (GlassfyGlueCompletion _Nonnull)block {
   return ^(NSError *_Nullable error) {
-    if (error) {
       block(nil, error);
-    }
   };
 }
 
