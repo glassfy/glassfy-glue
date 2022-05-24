@@ -15,11 +15,9 @@
     
     sku[@"name"] = self.name;
     sku[@"initialPrice"] = @(self.initialPrice.floatValue);
-    sku[@"localeIdentifier"] = self.initialPriceLocale.localeIdentifier;
     sku[@"initialPriceCode"] = self.initialPriceCode;
-
+    sku[@"extravars"] = self.extravars;
     sku[@"recurringPrice"] = @(self.recurringPrice.floatValue);
-    sku[@"recurringPriceLocale"] = self.recurringPriceLocale.localeIdentifier;
     sku[@"recurringPriceCode"] = self.recurringPriceCode;
     sku[@"extravars"] = self.extravars;
 
