@@ -8,7 +8,46 @@
 #import "GYTransaction+GGEncode.h"
 #import "GYUserProperties+GGEncode.h"
 
+
+@interface GlassfyGluePurchaseDelegateObject : NSObject<GYPurchaseDelegate>
+@property (nonatomic, weak) id<GlassfyGluePurchaseDelegate> delegate;
+@end
+
+@implementation GlassfyGluePurchaseDelegateObject
+
+
++(GlassfyGluePurchaseDelegateObject *)shared {
+    static dispatch_once_t initOnceToken;
+    static GlassfyGluePurchaseDelegateObject *singleton = nil;
+ 
+    dispatch_once(&initOnceToken, ^{
+        singleton = [[GlassfyGluePurchaseDelegateObject alloc] init];
+        singleton.delegate = nil;
+    });
+
+    return singleton;
+}
+
+- (void)didPurchaseProduct:(GYTransaction *)transaction{
+    if ([self.delegate respondsToSelector:@selector(didPurchaseProduct:)]) {
+        NSDictionary *encodedTransaction = [transaction encodedDictionary];
+        [self.delegate didPurchaseProduct:encodedTransaction];
+    }
+}
+
+- (void)handlePromotedProductId:(NSString *)productid
+              withPromotionalId:(NSString *)promoid
+                purchaseHandler:(void (^)(GYPaymentTransactionBlock))purchase {
+    if ([self.delegate respondsToSelector:@selector(handlePromotedProductId:withPromotionalId:purchaseHandler:)]) {
+        [self.delegate handlePromotedProductId:productid withPromotionalId:promoid purchaseHandler:purchase];
+    }
+}
+
+
+@end
+
 @implementation GlassfyGlue
+
 
 + (void)sdkVersionWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
   NSMutableDictionary *sdkVersion = [[NSMutableDictionary alloc] init];
@@ -20,8 +59,8 @@
                  watcherMode:(BOOL)watcherMode
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 {
-  [Glassfy initializeWithAPIKey:apiKey watcherMode:watcherMode];
-  block(nil, nil);
+    [Glassfy initializeWithAPIKey:apiKey watcherMode:watcherMode];
+    block(nil, nil);
 }
 
 + (void)setLogLevel:(int)logLevel {
@@ -223,6 +262,12 @@
   return ^(NSError *_Nullable error) {
       block(nil, error);
   };
+}
+
++ (void)setPurchaseDelegate:(id<GlassfyGluePurchaseDelegate> _Nullable)delegate {
+    GlassfyGluePurchaseDelegateObject *delegateObject = [GlassfyGluePurchaseDelegateObject shared];
+    [Glassfy setPurchaseDelegate:delegateObject];
+    delegateObject.delegate = delegate;
 }
 
 @end

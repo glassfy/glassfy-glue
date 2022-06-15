@@ -4,6 +4,15 @@
 #import "Glassfy.h"
 #endif
 
+@protocol GlassfyGluePurchaseDelegate <NSObject>
+@optional
+
+- (void)didPurchaseProduct:(NSDictionary<NSString *, id> *_Nonnull)transaction;
+- (void)handlePromotedProductId:(NSString *_Nonnull)productid
+              withPromotionalId:(NSString *_Nullable)promoid
+                purchaseHandler:(void (^_Nullable)(GYPaymentTransactionBlock _Nullable))purchase;
+@end
+
 typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable,
                                       NSError *_Nullable);
 
@@ -30,13 +39,13 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable,
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 + (void)setExtraUserProperty:(NSDictionary *_Nonnull)extraProp
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
-+ (void)getExtraUserPropertyWithCompletion:
-    (GlassfyGlueCompletion _Nonnull)block;
++ (void)getExtraUserPropertyWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
 + (void)connectPaddleLicenseKey:(NSString *_Nonnull)licenseKey
                           force:(BOOL)force
                      completion:(GlassfyGlueCompletion _Nonnull)block;
 + (void)connectCustomSubscriber:(NSString *_Nullable)customId
                      completion:(GlassfyGlueCompletion _Nonnull)block;
 + (void)storeInfo:(GlassfyGlueCompletion _Nonnull)block;
++ (void)setPurchaseDelegate:(id<GlassfyGluePurchaseDelegate> _Nullable)delegate;
 
 @end
