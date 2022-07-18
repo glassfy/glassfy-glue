@@ -6,8 +6,8 @@ import io.glassfy.androidsdk.Glassfy
 import io.glassfy.androidsdk.Glassfy.sku
 import io.glassfy.androidsdk.GlassfyError
 import io.glassfy.androidsdk.LogLevel
+import io.glassfy.androidsdk.model.ProrationMode
 import io.glassfy.androidsdk.model.SubscriptionUpdate
-import io.glassfy.androidsdk.model.Sku
 import io.glassfy.androidsdk.model.Store
 import org.json.JSONObject
 
@@ -100,7 +100,7 @@ object GlassfyGlue {
     }
   }
 
-  fun purchaseSku(activity: Activity, skuId: String, updateSku: SubscriptionUpdate?, callback: GlueCallback) {
+  fun purchaseSku(activity: Activity, skuId: String, updateSkuId: String?, updateSkuProration: Int?, callback: GlueCallback) {
     sku(skuId) { sku, skuerr ->
       if (skuerr != null) {
         callback(null, skuerr.toString())
@@ -109,6 +109,15 @@ object GlassfyGlue {
         callback(null, "InternalError")
         return@sku
       }
+
+      val updateSku = updateSkuId?.let { s ->
+        updateSkuProration?.let {
+            try { ProrationMode.fromProrationModeValue(it) } catch (e: Exception) { null }
+        }?.let {
+          SubscriptionUpdate(s, it)
+        } ?: SubscriptionUpdate(s)
+      }
+
       Glassfy.purchase(activity, sku, updateSku) { transaction, err ->
         if (err != null) {
           callback(null, err.toString())
@@ -120,11 +129,7 @@ object GlassfyGlue {
   }
 
   fun purchaseSku(activity: Activity, skuId: String, callback: GlueCallback) {
-     return purchaseSku(activity, skuId, null, callback)
-  }
-
-  fun purchaseSku(activity: Activity, purchaseSku: Sku, callback: GlueCallback) {
-     return purchaseSku(activity,purchaseSku.skuId,callback)
+     return purchaseSku(activity, skuId, null, null, callback)
   }
 
   fun restorePurchases(callback: GlueCallback) {
