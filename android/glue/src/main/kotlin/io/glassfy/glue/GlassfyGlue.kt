@@ -6,7 +6,8 @@ import io.glassfy.androidsdk.Glassfy
 import io.glassfy.androidsdk.Glassfy.sku
 import io.glassfy.androidsdk.GlassfyError
 import io.glassfy.androidsdk.LogLevel
-import io.glassfy.androidsdk.model.Sku
+import io.glassfy.androidsdk.model.ProrationMode
+import io.glassfy.androidsdk.model.SubscriptionUpdate
 import io.glassfy.androidsdk.model.Store
 import org.json.JSONObject
 
@@ -80,9 +81,9 @@ object GlassfyGlue {
 
   fun skuWithIdAndStore(identifier: String,store:Int, callback: GlueCallback) {
     val gyStore = when (store) {
-      Store.AppStore.value -> Store.AppStore;
-      Store.PlayStore.value -> Store.PlayStore;
-      Store.Paddle.value -> Store.Paddle;
+      Store.AppStore.value -> Store.AppStore
+      Store.PlayStore.value -> Store.PlayStore
+      Store.Paddle.value -> Store.Paddle
       else -> {
         callback(null, "invalid store")
         return
@@ -99,27 +100,36 @@ object GlassfyGlue {
     }
   }
 
-  fun purchaseSku(activity: Activity, skuId: String, callback: GlueCallback) {
-     sku(skuId) { sku, skuerr ->
-       if (skuerr != null) {
-         callback(null, skuerr.toString())
-         return@sku
-       } else if (sku == null) {
-         callback(null, "InternalError")
-         return@sku
-       }
-       Glassfy.purchase(activity, sku, null) { transaction, err ->
-         if (err != null) {
-           callback(null, err.toString())
-           return@purchase
-         }
-         callback(transaction?.encodedJson().toString(), null)
-       }
-     }
+  fun purchaseSku(activity: Activity, skuId: String, updateSkuId: String?, updateSkuProration: Int?, callback: GlueCallback) {
+    sku(skuId) { sku, skuerr ->
+      if (skuerr != null) {
+        callback(null, skuerr.toString())
+        return@sku
+      } else if (sku == null) {
+        callback(null, "InternalError")
+        return@sku
+      }
+
+      val updateSku = updateSkuId?.let { s ->
+        updateSkuProration?.let {
+            try { ProrationMode.fromProrationModeValue(it) } catch (e: Exception) { null }
+        }?.let {
+          SubscriptionUpdate(s, it)
+        } ?: SubscriptionUpdate(s)
+      }
+
+      Glassfy.purchase(activity, sku, updateSku) { transaction, err ->
+        if (err != null) {
+          callback(null, err.toString())
+          return@purchase
+        }
+        callback(transaction?.encodedJson().toString(), null)
+      }
+    }
   }
 
-  fun purchaseSku(activity: Activity, purchaseSku: Sku, callback: GlueCallback) {
-     return purchaseSku(activity,purchaseSku.skuId,callback)
+  fun purchaseSku(activity: Activity, skuId: String, callback: GlueCallback) {
+     return purchaseSku(activity, skuId, null, null, callback)
   }
 
   fun restorePurchases(callback: GlueCallback) {
