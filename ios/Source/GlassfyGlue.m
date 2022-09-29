@@ -15,7 +15,6 @@
 
 @implementation GlassfyGluePurchaseDelegateObject
 
-
 +(GlassfyGluePurchaseDelegateObject *)shared {
     static dispatch_once_t initOnceToken;
     static GlassfyGluePurchaseDelegateObject *singleton = nil;
@@ -43,11 +42,10 @@
     }
 }
 
-
 @end
 
-@implementation GlassfyGlue
 
+@implementation GlassfyGlue
 
 + (void)sdkVersionWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
   NSMutableDictionary *sdkVersion = [[NSMutableDictionary alloc] init];

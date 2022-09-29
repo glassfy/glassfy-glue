@@ -1,5 +1,5 @@
 //
-//  GYCodableProtocol.h
+//  GGCodableProtocol.h
 //  Glassfy
 //
 //  Created by Luca Garbolino on 22/12/20.
