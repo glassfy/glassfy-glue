@@ -38,6 +38,18 @@ fun Offerings.encodedJson(): JSONObject {
     return jo
 }
 
+fun AccountableSku.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    jo.put("skuId",this.skuId)
+    jo.put("productId",this.productId)
+    jo.put("store",this.store.value)
+
+    jo.put("isInIntroPeriod",this.isInIntroPeriod)
+    jo.put("isInTrialPeriod",this.isInTrialPeriod)
+
+    return jo;
+}
+
 fun Permission.encodedJson(): JSONObject {
     val jo = JSONObject()
     jo.put("permissionId",this.permissionId)
