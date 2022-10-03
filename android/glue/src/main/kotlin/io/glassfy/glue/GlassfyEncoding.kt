@@ -44,7 +44,7 @@ fun AccountableSku.encodedJson(): JSONObject {
     jo.put("productId",this.productId)
     jo.put("store",this.store.value)
 
-    jo.put("isInIntroPeriod",this.isInIntroPeriod)
+    jo.put("isInIntroOfferPeriod",this.isInIntroOfferPeriod)
     jo.put("isInTrialPeriod",this.isInTrialPeriod)
 
     return jo;
