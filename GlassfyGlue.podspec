@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GlassfyGlue'
-  s.version          = '1.3.3'
+  s.version          = '1.3.4'
   s.summary          = 'Glassfy Glue'
 
   s.homepage         = 'https://github.com/glassfy/glassfy-glue.git'
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ios/Source/Public/*.h', 'ios/Source/*.{h,m}'
   s.public_header_files = 'ios/Source/Public/*.h'
-  s.dependency 'Glassfy', '1.3.4'
+  s.dependency 'Glassfy', '1.3.5'
 
   s.test_spec 'GlassfyGlueTests' do |test_spec|
       test_spec.source_files = 'ios/Tests/*.{h,m,swift}'

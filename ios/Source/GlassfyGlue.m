@@ -268,4 +268,81 @@
     delegateObject.delegate = delegate;
 }
 
++ (void)setAttributionType:(NSNumber *_Nonnull)type
+                     value:(NSString *_Nullable)value
+                completion:(GlassfyGlueCompletion _Nonnull)block
+{
+    GYAttributionType attributionType = [self attributionItemTypeFromType:type];
+    if (attributionType == -1) {
+        NSError *err = [GlassfyGlue errorWithCode:-42
+                                      description:@"invalid parameter"];
+        block(nil, err);
+        return;
+    }
+    
+    [Glassfy setAttributionWithType:attributionType
+                              value:value
+                         completion:[GlassfyGlue errorOnlyCompletion:block]];
+}
+
++ (void)setAttributions:(NSArray *_Nonnull)items
+             completion:(GlassfyGlueCompletion _Nonnull)block
+{
+    NSMutableArray<GYAttributionItem *> *attributionItems = [NSMutableArray new];
+    for (NSDictionary *item in items) {
+        if (![item isKindOfClass:NSDictionary.class]) {
+            NSError *err = [GlassfyGlue errorWithCode:-42
+                                          description:@"invalid parameter"];
+            block(nil, err);
+            return;
+        }
+        
+        NSNumber *type = item[@"type"];
+        GYAttributionType attributionType = [self attributionItemTypeFromType:type];
+        
+        NSString *value = item[@"value"];
+        if (![value isKindOfClass:NSString.class]) {
+            value = nil;
+        }
+        
+        if (attributionType != -1) {
+            GYAttributionItem *item = [GYAttributionItem attributionItemWithType:attributionType value:value];
+            [attributionItems addObject:item];
+        } else {
+            NSError *err = [GlassfyGlue errorWithCode:-42
+                                          description:@"invalid parameter"];
+            block(nil, err);
+            return;
+        }
+    }
+    [Glassfy setAttributions:attributionItems completion:[GlassfyGlue errorOnlyCompletion:block]];
+}
+
++ (GYAttributionType)attributionItemTypeFromType:(NSNumber *_Nullable)type
+{
+    GYAttributionType attributionType = -1;
+    if ([type isKindOfClass:NSNumber.class]) {
+        switch (type.unsignedIntegerValue) {
+            case 1:
+                attributionType = GYAttributionTypeAdjustID;
+                break;
+            case 2:
+                attributionType = GYAttributionTypeAppsFlyerID;
+                break;
+            case 3:
+                attributionType = GYAttributionTypeIP;
+                break;
+            case 4:
+                attributionType = GYAttributionTypeIDFA;
+                break;
+            case 5:
+                attributionType = GYAttributionTypeIDFV;
+                break;
+            default:
+                break;
+        }
+    }
+    return attributionType;
+}
+
 @end

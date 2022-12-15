@@ -69,4 +69,11 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
 
 + (void)setPurchaseDelegate:(id<GlassfyGluePurchaseDelegate> _Nullable)delegate;
 
++ (void)setAttributionType:(NSNumber *_Nonnull)type
+                     value:(NSString *_Nullable)value
+                completion:(GlassfyGlueCompletion _Nonnull)block;
+
++ (void)setAttributions:(NSArray *_Nonnull)items
+             completion:(GlassfyGlueCompletion _Nonnull)block;
+
 @end
