@@ -9,6 +9,7 @@ import io.glassfy.androidsdk.LogLevel
 import io.glassfy.androidsdk.model.ProrationMode
 import io.glassfy.androidsdk.model.SubscriptionUpdate
 import io.glassfy.androidsdk.model.Store
+import org.json.JSONArray
 import org.json.JSONObject
 
 typealias GlueCallback = (String?, String?) -> Unit
@@ -76,6 +77,25 @@ object GlassfyGlue {
         val skuEncode = sku.encodedJson()
         callback(skuEncode.toString(), null)
       }
+    }
+  }
+
+  fun setAttribution(type: Int, value: String?, callback: GlueCallback) {
+    val gyAttribution = attributionItemTypeFromValue(type)
+    if (gyAttribution == null) {
+      callback.invoke(null, "invalid attribution type")
+      return
+    }
+    Glassfy.setAttribution(gyAttribution, value) { err ->
+      callback.invoke(null, err?.toString())
+    }
+  }
+
+  fun setAttributions(attributions: JSONArray, callback: GlueCallback) {
+    val items = attributionItemsFromJsonArray(attributions)
+    
+    Glassfy.setAttributions(items) { err ->
+      callback.invoke(null, err?.toString())
     }
   }
 
