@@ -149,6 +149,8 @@ fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
         2 -> AttributionItem.Type.AppsFlyerID
         3 -> AttributionItem.Type.IP
         6 -> AttributionItem.Type.GAID
+        7 -> AttributionItem.Type.ASID
+        8 -> AttributionItem.Type.AID
         else -> null
     }
 

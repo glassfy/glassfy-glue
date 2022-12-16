@@ -6,6 +6,7 @@ import io.glassfy.androidsdk.Glassfy
 import io.glassfy.androidsdk.Glassfy.sku
 import io.glassfy.androidsdk.GlassfyError
 import io.glassfy.androidsdk.LogLevel
+import io.glassfy.androidsdk.model.AttributionItem
 import io.glassfy.androidsdk.model.ProrationMode
 import io.glassfy.androidsdk.model.SubscriptionUpdate
 import io.glassfy.androidsdk.model.Store
@@ -91,9 +92,19 @@ object GlassfyGlue {
     }
   }
 
-  fun setAttributions(attributions: JSONArray, callback: GlueCallback) {
-    val items = attributionItemsFromJsonArray(attributions)
-    
+  fun setAttributions(attributions: List<Map<String, Any?>>, callback: GlueCallback) {
+    val items = mutableListOf<AttributionItem>()
+    for (attribution in attributions) {
+      val type = attribution["type"] as? Int
+      val gyAttribution = attributionItemTypeFromValue(type ?: -1)
+      if (gyAttribution == null) {
+        callback.invoke(null, "invalid attribution type")
+        return
+      }
+      val value = attribution["value"] as? String
+      val item = AttributionItem(gyAttribution, value)
+      items.add(item)
+    }
     Glassfy.setAttributions(items) { err ->
       callback.invoke(null, err?.toString())
     }
