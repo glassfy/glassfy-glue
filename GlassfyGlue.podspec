@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ios/Source/Public/*.h', 'ios/Source/*.{h,m}'
   s.public_header_files = 'ios/Source/Public/*.h'
-  s.dependency 'Glassfy', '1.3.5'
+  s.dependency 'Glassfy', '1.3.7'
 
   s.test_spec 'GlassfyGlueTests' do |test_spec|
       test_spec.source_files = 'ios/Tests/*.{h,m,swift}'
