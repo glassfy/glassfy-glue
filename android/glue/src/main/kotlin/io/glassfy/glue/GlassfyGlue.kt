@@ -58,6 +58,17 @@ object GlassfyGlue {
     }
   }
 
+  fun purchaseHistory(callback: GlueCallback) {
+    Glassfy.purchaseHistory { history, err ->
+      if (err != null) {
+        callback(null, err.toString())
+      } else if (history != null) {
+        val historyEncoded = history.encodedJson()
+        callback(historyEncoded.toString(), null)
+      }
+    }
+  }
+
   fun permissions(callback: GlueCallback) {
     Glassfy.permissions { permissions, err ->
       if (err != null) {
@@ -215,4 +226,3 @@ object GlassfyGlue {
     }
   }
 }
-
