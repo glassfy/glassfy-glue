@@ -31,9 +31,16 @@ object GlassfyGlue {
     ctx: android.content.Context,
     apiKey: String,
     watcherMode: Boolean,
+    crossPlatformSdkFramework: String,
+    crossPlatformSdkVersion: String,
     callback: GlueCallback
   ) {
-    Glassfy.initialize(ctx, apiKey, watcherMode) { _, err ->
+    var options = Glassfy.InitializeOptions(ctx, apiKey)
+    options.watcherMode(watcherMode)
+    options.crossPlatformSdkFramework(crossPlatformSdkFramework)
+    options.crossPlatformSdkVersion(crossPlatformSdkVersion)
+
+    Glassfy.initialize(options) { _, err ->
       callback(null, err?.toString())
     }
   }
@@ -54,6 +61,17 @@ object GlassfyGlue {
       } else if (offerings != null) {
         val offeringEncoded = offerings.encodedJson()
         callback(offeringEncoded.toString(), null)
+      }
+    }
+  }
+
+  fun purchaseHistory(callback: GlueCallback) {
+    Glassfy.purchaseHistory { history, err ->
+      if (err != null) {
+        callback(null, err.toString())
+      } else if (history != null) {
+        val historyEncoded = history.encodedJson()
+        callback(historyEncoded.toString(), null)
       }
     }
   }
@@ -215,4 +233,3 @@ object GlassfyGlue {
     }
   }
 }
-

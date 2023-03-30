@@ -24,38 +24,63 @@ fun encodeStringArray(array:List<String>):JSONArray {
 
 fun Offering.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("offeringId",this.offeringId)
+    jo.put("offeringId", this.offeringId)
 
-    val skus = encodeArray(this.skus.map { it.encodedJson()})
-    jo.put("skus",skus)
+    val skus = encodeArray(this.skus.map { it.encodedJson() })
+    jo.put("skus", skus)
     return jo
 }
 
 fun Offerings.encodedJson(): JSONObject {
     val jo = JSONObject()
-    val all = encodeArray(this.all.map { it.encodedJson()})
-    jo.put("all",all)
+    val all = encodeArray(this.all.map { it.encodedJson() })
+    jo.put("all", all)
+    return jo
+}
+
+fun PurchasesHistory.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    val all = encodeArray(this.all.map { it.encodedJson() })
+    jo.put("all", all)
+    return jo
+}
+
+fun PurchaseHistory.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    jo.put("productId", productId)
+    jo.put("skuId", skuId)
+    jo.put("type", type.value)
+    jo.put("store", store.value)
+    jo.put("purchaseDate", purchaseDate)
+    jo.put("expireDate", expireDate)
+    jo.put("transactionId", transactionId)
+    jo.put("subscriberId", subscriberId)
+    jo.put("currencyCode", currencyCode)
+    jo.put("countryCode", countryCode)
+    jo.put("isInIntroOfferPeriod", isInIntroOfferPeriod)
+    jo.put("promotionalOfferId", promotionalOfferId)
+    jo.put("offerCodeRefName", offerCodeRefName)
+    jo.put("licenseCode", licenseCode)
+    jo.put("webOrderLineItemId", webOrderLineItemId)
     return jo
 }
 
 fun AccountableSku.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("skuId",this.skuId)
-    jo.put("productId",this.productId)
-    jo.put("store",this.store.value)
-
-    jo.put("isInIntroOfferPeriod",this.isInIntroOfferPeriod)
-    jo.put("isInTrialPeriod",this.isInTrialPeriod)
-
+    jo.put("skuId", this.skuId)
+    jo.put("productId", this.productId)
+    jo.put("store", this.store.value)
+    jo.put("isInIntroOfferPeriod", this.isInIntroOfferPeriod)
+    jo.put("isInTrialPeriod", this.isInTrialPeriod)
     return jo;
 }
 
 fun Permission.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("permissionId",this.permissionId)
-    jo.put("entitlement",this.entitlement.value)
-    jo.put("isValid",this.isValid)
-    jo.put("expireDate",this.expireDate)
+    jo.put("permissionId", this.permissionId)
+    jo.put("entitlement", this.entitlement.value)
+    jo.put("isValid", this.isValid)
+    jo.put("expireDate", this.expireDate)
     jo.put("accountableSkus",encodeArray(this.accountableSkus.map { it.encodedJson()}))
     return jo
 }
@@ -70,11 +95,11 @@ fun Permissions.encodedJson(): JSONObject {
 
 fun Sku.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("skuId",this.skuId)
-    jo.put("productId",this.productId)
-    jo.put("store",this.store.value)
+    jo.put("skuId", this.skuId)
+    jo.put("productId", this.productId)
+    jo.put("store", this.store.value)
     jo.put("extravars",JSONObject(this.extravars))
-    jo.put("product",this.product.encodedJson())
+    jo.put("product", this.product.encodedJson())
     return jo
 }
 
@@ -96,17 +121,17 @@ fun SkuPaddle.encodedJson(): JSONObject {
 
 fun SkuBase.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("skuId",this.skuId)
-    jo.put("productId",this.productId)
-    jo.put("store",this.store.value)
+    jo.put("skuId", this.skuId)
+    jo.put("productId", this.productId)
+    jo.put("store", this.store.value)
     return jo;
 }
 
 fun ISkuBase.encodedJson(): JSONObject {
     val jo = JSONObject()
-    jo.put("skuId",this.skuId)
-    jo.put("productId",this.productId)
-    jo.put("store",this.store.value)
+    jo.put("skuId", this.skuId)
+    jo.put("productId", this.productId)
+    jo.put("store", this.store.value)
     return jo;
 }
 
@@ -160,14 +185,14 @@ fun SkuDetails.encodedJson():JSONObject{
     jo.put("identifier", this.sku)
     jo.put("description", this.description)
     jo.put("title", this.title)
-    jo.put("price",this.priceAmountMicro / 1000000.0)
+    jo.put("price", this.priceAmountMicro / 1000000.0)
     jo.put("currencyCode", this.priceCurrencyCode)
 
     if (this.freeTrialPeriod.isNotBlank()) {
         val ftjo = JSONObject()
 
         ftjo.put("price",0)
-        ftjo.put("period",this.freeTrialPeriod)
+        ftjo.put("period", this.freeTrialPeriod)
         ftjo.put("numberOfPeriods",1)
         ftjo.put("type","introductory")
         ftjo.put("currencyCode", this.priceCurrencyCode)
@@ -190,8 +215,8 @@ fun SkuDetails.encodedJson():JSONObject{
 
 fun UserProperties.encodedJson():JSONObject {
     val jo = JSONObject()
-    jo.put("email",this.email)
-    jo.put("token",this.token)
-    jo.put("extra",this.extra)
+    jo.put("email", this.email)
+    jo.put("token", this.token)
+    jo.put("extra", this.extra)
     return jo;
 }

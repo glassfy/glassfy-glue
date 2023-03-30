@@ -17,10 +17,6 @@ android {
         targetSdk = Configuration.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
-
-//        sourceSets.getByName("main") {
-//            java.srcDir("src/main/java")
-//        }
     }
 
     buildTypes {
@@ -54,7 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("io.glassfy:androidsdk:1.3.8")
+    implementation("io.glassfy:androidsdk:1.3.10")
 }
 
 // Sources
