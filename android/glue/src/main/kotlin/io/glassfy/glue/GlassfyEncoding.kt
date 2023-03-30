@@ -51,8 +51,6 @@ fun PurchaseHistory.encodedJson(): JSONObject {
     jo.put("skuId", skuId)
     jo.put("type", type.value)
     jo.put("store", store.value)
-    jo.put("purchaseDate", purchaseDate)
-    jo.put("expireDate", expireDate)
     jo.put("transactionId", transactionId)
     jo.put("subscriberId", subscriberId)
     jo.put("currencyCode", currencyCode)
@@ -62,6 +60,13 @@ fun PurchaseHistory.encodedJson(): JSONObject {
     jo.put("offerCodeRefName", offerCodeRefName)
     jo.put("licenseCode", licenseCode)
     jo.put("webOrderLineItemId", webOrderLineItemId)
+
+    purchaseDate?.time?.let {
+        jo.put("purchaseDate", it / 1000L)
+    }
+    expireDate?.time?.let {
+        jo.put("expireDate", it / 1000L)
+    }
     return jo
 }
 
