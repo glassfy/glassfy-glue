@@ -1,6 +1,5 @@
 package io.glassfy.glue
 
-import io.glassfy.androidsdk.Glassfy
 import io.glassfy.androidsdk.model.*
 import org.json.JSONArray
 import org.json.JSONObject
