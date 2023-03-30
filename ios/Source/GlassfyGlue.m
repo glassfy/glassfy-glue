@@ -57,10 +57,16 @@
 
 + (void)initializeWithApiKey:(NSString *_Nonnull)apiKey
                  watcherMode:(BOOL)watcherMode
+   crossPlatformSdkFramework:(NSString *_Nonnull)crossPlatformSdkFramework
+     crossPlatformSdkVersion:(NSString *_Nonnull)crossPlatformSdkVersion
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 {
-    [Glassfy initializeWithAPIKey:apiKey watcherMode:watcherMode];
-    block(nil, nil);
+  GYInitializeOptions* options = [GYInitializeOptions initializeOptionsWithAPIKey: apiKey];
+  [options watcherMode: watcherMode];
+  [options crossPlatformSdkFramework: crossPlatformSdkFramework];
+  [options crossPlatformSdkVersion: crossPlatformSdkVersion];
+  [Glassfy initializeWithOptions: options];
+  block(nil, nil);
 }
 
 + (void)setLogLevel:(int)logLevel {

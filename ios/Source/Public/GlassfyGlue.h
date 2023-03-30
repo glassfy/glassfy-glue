@@ -27,6 +27,8 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
 
 + (void)initializeWithApiKey:(NSString *_Nonnull)apiKey
                  watcherMode:(BOOL)watcherMode
+   crossPlatformSdkFramework:(NSString *_Nonnull)crossPlatformSdkFramework
+     crossPlatformSdkVersion:(NSString *_Nonnull)crossPlatformSdkVersion
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 
 + (void)setLogLevel:(int)logLevel;
