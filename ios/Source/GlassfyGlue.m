@@ -2,6 +2,8 @@
 #import "GYOffering+GGEncode.h"
 #import "GYOfferings+GGEncode.h"
 #import "GYPermissions+GGEncode.h"
+#import "GYPurchaseHistory+GGEncode.h"
+#import "GYPurchasesHistory+GGEncode.h"
 #import "GYSku+GGEncode.h"
 #import "GYSkuBase+GGEncode.h"
 #import "GYStoresInfo+GGEncode.h"
@@ -73,6 +75,18 @@
   } else if (logLevel == 4) {
     [Glassfy setLogLevel:GYLogLevelAll];
   }
+}
+
++ (void)purchaseHistoryWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
+  [Glassfy purchaseHistoryWithCompletion:^(GYPurchasesHistory *history, NSError *error) {
+    if (error != nil) {
+      block(nil, error);
+      return;
+    }
+
+    NSDictionary *retHistory = [history encodedDictionary];
+    block(retHistory, nil);
+  }];
 }
 
 + (void)offeringsWithCompletion:(GlassfyGlueCompletion _Nonnull)block {

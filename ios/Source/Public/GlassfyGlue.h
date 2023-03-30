@@ -31,6 +31,8 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
 
 + (void)setLogLevel:(int)logLevel;
 
++ (void)purchaseHistoryWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
+
 + (void)offeringsWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
 
 + (void)permissionsWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
