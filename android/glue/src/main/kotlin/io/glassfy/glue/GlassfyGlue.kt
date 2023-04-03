@@ -232,4 +232,10 @@ object GlassfyGlue {
       callback(null, err?.toString())
     }
   }
+
+  fun connectGlassfyUniversalCode(universalCode: String, force: Boolean, callback: GlueCallback) {
+    Glassfy.connectGlassfyUniversalCode(universalCode, force) { err ->
+      callback(null, err?.toString())
+    }
+  }
 }

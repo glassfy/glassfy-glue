@@ -242,6 +242,20 @@
                         }];
 }
 
++ (void)connectGlassfyUniversalCode:(NSString*)universalCode
+                              force:(BOOL)force
+                         completion:(GlassfyGlueCompletion _Nonnull)block {
+    [Glassfy connectGlassfyUniversalCode:universalCode
+                                   force:force
+                          withCompletion:^(NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        block(nil, nil);
+    }];
+}
+
 + (void)connectCustomSubscriber:(NSString *_Nullable)customId
                      completion:(GlassfyGlueCompletion _Nonnull)block {
   [Glassfy connectCustomSubscriber:customId
