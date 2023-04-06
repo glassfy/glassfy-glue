@@ -19,6 +19,6 @@ jobs:
       run: |
         set -eo pipefail
         pod spec lint GlassfyGlue.podspec --verbose --allow-warnings
-        pod trunk push --allow-warnings --verbose
+        pod trunk push GlassfyGlue.podspec --verbose --allow-warnings
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
