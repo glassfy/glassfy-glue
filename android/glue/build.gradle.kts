@@ -134,3 +134,11 @@ afterEvaluate {
     }
 }
 
+signing {
+     useInMemoryPgpKeys(
+         rootProject.ext["signing.keyId"] as String,
+         rootProject.ext["signing.key"] as String,
+         rootProject.ext["signing.password"] as String,
+     )
+     sign(publishing.publications)
+ }
