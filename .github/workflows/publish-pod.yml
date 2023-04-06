@@ -18,8 +18,7 @@ jobs:
     - name: Deploy
       run: |
         set -eo pipefail
-        pod repo update
-        pod lib lint --allow-warnings
-        pod trunk push --allow-warnings
+        pod spec lint GlassfyGlue.podspec --verbose --allow-warnings
+        pod trunk push --allow-warnings --verbose
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
