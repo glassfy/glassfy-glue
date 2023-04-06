@@ -128,11 +128,13 @@ object GlassfyGlue {
     }
   }
 
-  fun skuWithIdAndStore(identifier: String,store:Int, callback: GlueCallback) {
+  fun skuWithIdAndStore(identifier: String, store: Int, callback: GlueCallback) {
     val gyStore = when (store) {
       Store.AppStore.value -> Store.AppStore
       Store.PlayStore.value -> Store.PlayStore
       Store.Paddle.value -> Store.Paddle
+      Store.Stripe.value -> Store.Stripe
+      Store.Glassfy.value -> Store.Glassfy
       else -> {
         callback(null, "invalid store")
         return
@@ -229,6 +231,12 @@ object GlassfyGlue {
 
   fun connectPaddleLicenseKey(licenseKey:String,force:Boolean,callback: GlueCallback) {
     Glassfy.connectPaddleLicenseKey(licenseKey,force){ err ->
+      callback(null, err?.toString())
+    }
+  }
+
+  fun connectGlassfyUniversalCode(universalCode: String, force: Boolean, callback: GlueCallback) {
+    Glassfy.connectGlassfyUniversalCode(universalCode, force) { err ->
       callback(null, err?.toString())
     }
   }

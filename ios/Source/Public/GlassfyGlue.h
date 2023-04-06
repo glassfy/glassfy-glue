@@ -66,6 +66,10 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
                           force:(BOOL)force
                      completion:(GlassfyGlueCompletion _Nonnull)block;
 
++ (void)connectGlassfyUniversalCode:(NSString *_Nonnull)universalCode
+                              force:(BOOL)force
+                         completion:(GlassfyGlueCompletion _Nonnull)block;
+
 + (void)connectCustomSubscriber:(NSString *_Nullable)customId
                      completion:(GlassfyGlueCompletion _Nonnull)block;
 

@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("io.glassfy:androidsdk:1.3.10")
+    implementation("io.glassfy:androidsdk:1.3.11")
 }
 
 // Sources
@@ -134,11 +134,3 @@ afterEvaluate {
     }
 }
 
-signing {
-    useInMemoryPgpKeys(
-        rootProject.ext["signing.keyId"] as String,
-        rootProject.ext["signing.key"] as String,
-        rootProject.ext["signing.password"] as String,
-    )
-    sign(publishing.publications)
-}
