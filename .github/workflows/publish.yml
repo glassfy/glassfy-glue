@@ -2,6 +2,11 @@ name: Publish Android
 
 on:
   workflow_dispatch:
+    inputs:
+      auto-publish:
+        required: true
+        type: boolean
+        description: Automatically close and publish staging release
 
 jobs:
   publish:
@@ -23,10 +28,21 @@ jobs:
         run: ./gradlew assembleRelease
       - name: Source jar and dokka
         run: ./gradlew :glue:androidSourcesJar :glue:javadocJar
-      - name: Publish to MavenCentral
+          
+      - name: Publish to Sonatype
+        if: ${{ inputs.auto-publish != true}}
         run: ./gradlew :glue:publishReleasePublicationToSonatypeRepository
-        # auto-close staging repository
-        # run: ./gradlew :glue:publishReleasePublicationToSonatypeRepository --max-workers 1 :glue:closeAndReleaseSonatypeStagingRepository
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
+
+      - name: Publish and Release to Sonatype
+        if: ${{ inputs.auto-publish == true}}
+        run: ./gradlew :glue:publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
