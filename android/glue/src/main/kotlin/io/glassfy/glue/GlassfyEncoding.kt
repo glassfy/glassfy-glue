@@ -6,7 +6,7 @@ import org.json.JSONObject
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-fun encodeArray(array:List<JSONObject>):JSONArray {
+fun encodeArray(array:List<JSONObject>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -14,7 +14,7 @@ fun encodeArray(array:List<JSONObject>):JSONArray {
     return all
 }
 
-fun encodeStringArray(array:List<String>):JSONArray {
+fun encodeStringArray(array:List<String>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -184,7 +184,7 @@ fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
         else -> null
     }
 
-fun SkuDetails.encodedJson():JSONObject{
+fun SkuDetails.encodedJson(): JSONObject{
     val jo = JSONObject()
 
     jo.put("identifier", this.sku)
@@ -218,7 +218,7 @@ fun SkuDetails.encodedJson():JSONObject{
     return jo;
 }
 
-fun UserProperties.encodedJson():JSONObject {
+fun UserProperties.encodedJson(): JSONObject {
     val jo = JSONObject()
     jo.put("email", this.email)
     jo.put("token", this.token)
