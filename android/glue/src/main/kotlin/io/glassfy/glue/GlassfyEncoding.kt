@@ -146,13 +146,6 @@ fun Transaction.encodedJson(): JSONObject {
     return jo
 }
 
-fun skuFromJsonObject(jo: JSONObject):Sku {
-    val skuId = jo.optString("skuId")
-    val productId = jo.optString("productId")
-
-    return Sku(skuId,productId, emptyMap<String, String>(), null)
-}
-
 fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
     val joType = jo.optInt("type",-1)
 
@@ -160,17 +153,6 @@ fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
     val value = jo.optString("value")
 
     return if (type != null) AttributionItem(type, value) else null
-}
-
-fun attributionItemsFromJsonArray(ja: JSONArray): List<AttributionItem> {
-    val items = mutableListOf<AttributionItem>()
-    for (i in 0 until ja.length()) {
-        val jo = ja.getJSONObject(i)
-        attributionItemFromJsonObject(jo)?.let { item ->
-            items.add(item)
-        }
-    }
-    return items
 }
 
 fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
