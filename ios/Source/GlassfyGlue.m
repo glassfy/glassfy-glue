@@ -134,6 +134,10 @@
           }];
 }
 
++ (void)paywall:(NSString *_Nonnull)remoteConfig withCompletion:(GlassfyGlueCompletion _Nonnull)block {
+  block(nil, error);
+}
+
 + (void)skuWithId:(NSString *)skuid
             store:(GYStore)store
        completion:(GlassfyGlueCompletion _Nonnull)block {
