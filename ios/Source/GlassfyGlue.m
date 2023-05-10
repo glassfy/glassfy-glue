@@ -1,4 +1,5 @@
 #import "GlassfyGlue.h"
+#import "GYPaywall+GGEncode.h"
 #import "GYOffering+GGEncode.h"
 #import "GYOfferings+GGEncode.h"
 #import "GYPermissions+GGEncode.h"
@@ -20,12 +21,12 @@
 +(GlassfyGluePurchaseDelegateObject *)shared {
     static dispatch_once_t initOnceToken;
     static GlassfyGluePurchaseDelegateObject *singleton = nil;
- 
+    
     dispatch_once(&initOnceToken, ^{
         singleton = [[GlassfyGluePurchaseDelegateObject alloc] init];
         singleton.delegate = nil;
     });
-
+    
     return singleton;
 }
 
@@ -50,9 +51,9 @@
 @implementation GlassfyGlue
 
 + (void)sdkVersionWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  NSMutableDictionary *sdkVersion = [[NSMutableDictionary alloc] init];
-  sdkVersion[@"version"] = [Glassfy sdkVersion];
-  block(sdkVersion, nil);
+    NSMutableDictionary *sdkVersion = [[NSMutableDictionary alloc] init];
+    sdkVersion[@"version"] = [Glassfy sdkVersion];
+    block(sdkVersion, nil);
 }
 
 + (void)initializeWithApiKey:(NSString *_Nonnull)apiKey
@@ -61,189 +62,196 @@
      crossPlatformSdkVersion:(NSString *_Nonnull)crossPlatformSdkVersion
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 {
-  GYInitializeOptions* options = [GYInitializeOptions initializeOptionsWithAPIKey: apiKey];
-  [options watcherMode: watcherMode];
-  [options crossPlatformSdkFramework: crossPlatformSdkFramework];
-  [options crossPlatformSdkVersion: crossPlatformSdkVersion];
-  [Glassfy initializeWithOptions: options];
-  block(nil, nil);
+    GYInitializeOptions* options = [GYInitializeOptions initializeOptionsWithAPIKey: apiKey];
+    [options watcherMode: watcherMode];
+    [options crossPlatformSdkFramework: crossPlatformSdkFramework];
+    [options crossPlatformSdkVersion: crossPlatformSdkVersion];
+    [Glassfy initializeWithOptions: options];
+    block(nil, nil);
 }
 
 + (void)setLogLevel:(int)logLevel {
-  if (logLevel == 0) {
-    [Glassfy setLogLevel:GYLogLevelOff];
-  } else if (logLevel == 1) {
-    [Glassfy setLogLevel:GYLogLevelError];
-  } else if (logLevel == 2) {
-    [Glassfy setLogLevel:GYLogLevelDebug];
-  } else if (logLevel == 3) {
-    [Glassfy setLogLevel:GYLogLevelInfo];
-  } else if (logLevel == 4) {
-    [Glassfy setLogLevel:GYLogLevelAll];
-  }
+    if (logLevel == 0) {
+        [Glassfy setLogLevel:GYLogLevelOff];
+    } else if (logLevel == 1) {
+        [Glassfy setLogLevel:GYLogLevelError];
+    } else if (logLevel == 2) {
+        [Glassfy setLogLevel:GYLogLevelDebug];
+    } else if (logLevel == 3) {
+        [Glassfy setLogLevel:GYLogLevelInfo];
+    } else if (logLevel == 4) {
+        [Glassfy setLogLevel:GYLogLevelAll];
+    }
 }
 
 + (void)purchaseHistoryWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy purchaseHistoryWithCompletion:^(GYPurchasesHistory *history, NSError *error) {
-    if (error != nil) {
-      block(nil, error);
-      return;
-    }
-
-    NSDictionary *retHistory = [history encodedDictionary];
-    block(retHistory, nil);
-  }];
+    [Glassfy purchaseHistoryWithCompletion:^(GYPurchasesHistory *history, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        
+        NSDictionary *retHistory = [history encodedDictionary];
+        block(retHistory, nil);
+    }];
 }
 
 + (void)offeringsWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy offeringsWithCompletion:^(GYOfferings *offerings, NSError *error) {
-    if (error != nil) {
-      block(nil, error);
-      return;
-    }
+    [Glassfy offeringsWithCompletion:^(GYOfferings *offerings, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        
+        NSDictionary *retOfferings = [offerings encodedDictionary];
+        block(retOfferings, nil);
+    }];
+}
 
-    NSDictionary *retOfferings = [offerings encodedDictionary];
-    block(retOfferings, nil);
-  }];
++ (void)paywallWithId:(NSString *_Nonnull)remoteConfigId completion:(GlassfyGlueCompletion _Nonnull)block
+{
+    [Glassfy paywallWithId:remoteConfigId completion:^(GYPaywall *paywall, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+        } else {
+            block([paywall encodedDictionary], error);
+        }
+    }];
 }
 
 + (void)permissionsWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy
-      permissionsWithCompletion:^(GYPermissions *permissions, NSError *error) {
+    [Glassfy
+     permissionsWithCompletion:^(GYPermissions *permissions, NSError *error) {
         if (error != nil) {
-          block(nil, error);
-          return;
+            block(nil, error);
+            return;
         }
-
+        
         NSDictionary *retPermissions = [permissions encodedDictionary];
         block(retPermissions, nil);
-      }];
+    }];
 }
 
 + (void)skuWithId:(NSString *_Nonnull)skuid
-    withCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy skuWithId:skuid
-          completion:^(GYSku *sku, NSError *error) {
-            if (error != nil) {
-              block(nil, error);
-              return;
-            }
-
-            NSDictionary *retSku = [sku encodedDictionary];
-            block(retSku, nil);
-          }];
-}
-
-+ (void)paywall:(NSString *_Nonnull)remoteConfig withCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  block(nil, error);
+   withCompletion:(GlassfyGlueCompletion _Nonnull)block {
+    [Glassfy skuWithId:skuid
+            completion:^(GYSku *sku, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        
+        NSDictionary *retSku = [sku encodedDictionary];
+        block(retSku, nil);
+    }];
 }
 
 + (void)skuWithId:(NSString *)skuid
             store:(GYStore)store
        completion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy skuWithId:skuid
-               store:store
-          completion:^(GYSkuBase *skuBase, NSError *error) {
-            if (error != nil) {
-              block(nil, error);
-              return;
-            }
-            NSDictionary *retSku = [skuBase encodedDictionary];
-            block(retSku, nil);
-          }];
+    [Glassfy skuWithId:skuid
+                 store:store
+            completion:^(GYSkuBase *skuBase, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        NSDictionary *retSku = [skuBase encodedDictionary];
+        block(retSku, nil);
+    }];
 }
 
 + (void)purchaseSku:(NSDictionary *_Nonnull)sku
      withCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  if (![sku isKindOfClass:[NSDictionary class]]) {
-    block(nil, [GlassfyGlue errorWithCode:-42
-                              description:@"invalid parameter"]);
-    return;
-  }
-  NSString *skuId = sku[@"skuId"];
-  if (skuId == nil) {
-    block(nil, [GlassfyGlue errorWithCode:-42
-                              description:@"invalid parameter"]);
-    return;
-  }
-  [Glassfy skuWithId:skuId
-          completion:^(GYSku *sku, NSError *error) {
+    if (![sku isKindOfClass:[NSDictionary class]]) {
+        block(nil, [GlassfyGlue errorWithCode:-42
+                                  description:@"invalid parameter"]);
+        return;
+    }
+    NSString *skuId = sku[@"skuId"];
+    if (skuId == nil) {
+        block(nil, [GlassfyGlue errorWithCode:-42
+                                  description:@"invalid parameter"]);
+        return;
+    }
+    [Glassfy skuWithId:skuId
+            completion:^(GYSku *sku, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        
+        [Glassfy purchaseSku:sku
+                  completion:^(GYTransaction *transaction, NSError *error) {
             if (error != nil) {
-              block(nil, error);
-              return;
+                block(nil, error);
+                return;
             }
-
-            [Glassfy purchaseSku:sku
-                      completion:^(GYTransaction *transaction, NSError *error) {
-                        if (error != nil) {
-                          block(nil, error);
-                          return;
-                        }
-                        NSDictionary *retTransaction =
-                            [transaction encodedDictionary];
-
-                        block(retTransaction, nil);
-                      }];
-          }];
+            NSDictionary *retTransaction =
+            [transaction encodedDictionary];
+            
+            block(retTransaction, nil);
+        }];
+    }];
 }
 
 + (void)restorePurchasesWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy restorePurchasesWithCompletion:^(GYPermissions *permissions,
-                                            NSError *error) {
-    if (error != nil) {
-      block(nil, error);
-      return;
-    }
-
-    NSDictionary *retPermissions = [permissions encodedDictionary];
-    block(retPermissions, nil);
-  }];
+    [Glassfy restorePurchasesWithCompletion:^(GYPermissions *permissions,
+                                              NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        
+        NSDictionary *retPermissions = [permissions encodedDictionary];
+        block(retPermissions, nil);
+    }];
 }
 
 + (void)setDeviceToken:(NSString *)token
         withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 {
-  [Glassfy setDeviceToken:token
-               completion:[GlassfyGlue errorOnlyCompletion:block]];
+    [Glassfy setDeviceToken:token
+                 completion:[GlassfyGlue errorOnlyCompletion:block]];
 }
 
 + (void)setEmailUserProperty:(NSString *)email
               withCompletion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy setEmailUserProperty:email completion:[GlassfyGlue errorOnlyCompletion:block]];
+    [Glassfy setEmailUserProperty:email completion:[GlassfyGlue errorOnlyCompletion:block]];
 }
 
 + (void)setExtraUserProperty:(NSDictionary *)extraProp
               withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 {
-  [Glassfy setExtraUserProperty:extraProp
-                     completion:[GlassfyGlue errorOnlyCompletion:block]];
+    [Glassfy setExtraUserProperty:extraProp
+                       completion:[GlassfyGlue errorOnlyCompletion:block]];
 }
 
 + (void)getExtraUserPropertyWithCompletion:
-    (GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy getUserProperties:^(GYUserProperties *userproperty, NSError *error) {
-    if (error != nil) {
-      block(nil, error);
-      return;
-    }
-    NSDictionary *retProperty = [userproperty encodedDictionary];
-
-    block(retProperty, nil);
-  }];
+(GlassfyGlueCompletion _Nonnull)block {
+    [Glassfy getUserProperties:^(GYUserProperties *userproperty, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        NSDictionary *retProperty = [userproperty encodedDictionary];
+        
+        block(retProperty, nil);
+    }];
 }
 
 + (void)connectPaddleLicenseKey:(NSString *)licenseKey
                           force:(BOOL)force
                      completion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy connectPaddleLicenseKey:licenseKey
-                             force:force
-                        completion:^(NSError *error) {
-                          if (error != nil) {
-                            block(nil, error);
-                            return;
-                          }
-                          block(nil, nil);
-                        }];
+    [Glassfy connectPaddleLicenseKey:licenseKey
+                               force:force
+                          completion:^(NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        block(nil, nil);
+    }];
 }
 
 + (void)connectGlassfyUniversalCode:(NSString*)universalCode
@@ -262,42 +270,42 @@
 
 + (void)connectCustomSubscriber:(NSString *_Nullable)customId
                      completion:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy connectCustomSubscriber:customId
-                        completion:^(NSError *error) {
-                          if (error != nil) {
-                            block(nil, error);
-                            return;
-                          }
-                          block(nil, nil);
-                        }];
+    [Glassfy connectCustomSubscriber:customId
+                          completion:^(NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        block(nil, nil);
+    }];
 }
 
 + (void)storeInfo:(GlassfyGlueCompletion _Nonnull)block {
-  [Glassfy storeInfo:^(GYStoresInfo *storeInfo, NSError *error) {
-    if (error != nil) {
-      block(nil, error);
-      return;
-    }
-    NSDictionary *infoStoreDict = [storeInfo encodedDictionary];
-    block(infoStoreDict, nil);
-  }];
+    [Glassfy storeInfo:^(GYStoresInfo *storeInfo, NSError *error) {
+        if (error != nil) {
+            block(nil, error);
+            return;
+        }
+        NSDictionary *infoStoreDict = [storeInfo encodedDictionary];
+        block(infoStoreDict, nil);
+    }];
 }
 
 + (NSError *)errorWithCode:(int)code description:(NSString *)description {
-  NSDictionary *userInfo = @{
-    NSLocalizedDescriptionKey : description,
-  };
-  NSError *error = [NSError errorWithDomain:@"io.glassfy.glue"
-                                       code:code
-                                   userInfo:userInfo];
-  return error;
+    NSDictionary *userInfo = @{
+        NSLocalizedDescriptionKey : description,
+    };
+    NSError *error = [NSError errorWithDomain:@"io.glassfy.glue"
+                                         code:code
+                                     userInfo:userInfo];
+    return error;
 }
 
 + (void (^)(NSError *_Nullable))errorOnlyCompletion:
-    (GlassfyGlueCompletion _Nonnull)block {
-  return ^(NSError *_Nullable error) {
-      block(nil, error);
-  };
+(GlassfyGlueCompletion _Nonnull)block {
+    return ^(NSError *_Nullable error) {
+        block(nil, error);
+    };
 }
 
 + (void)setPurchaseDelegate:(id<GlassfyGluePurchaseDelegate> _Nullable)delegate {

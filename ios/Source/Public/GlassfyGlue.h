@@ -39,6 +39,8 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
 
 + (void)permissionsWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
 
++ (void)paywallWithId:(NSString *_Nonnull)remoteConfigId completion:(GlassfyGlueCompletion _Nonnull)block;
+
 + (void)skuWithId:(NSString *_Nonnull)skuid
     withCompletion:(GlassfyGlueCompletion _Nonnull)block;
 
