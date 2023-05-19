@@ -110,6 +110,7 @@
 
 + (void)paywallWithId:(NSString *_Nonnull)remoteConfigId completion:(GlassfyGlueCompletion _Nonnull)block
 {
+#if TARGET_OS_IPHONE
     [Glassfy paywallWithId:remoteConfigId completion:^(GYPaywall *paywall, NSError *error) {
         if (error != nil) {
             block(nil, error);
@@ -117,6 +118,9 @@
             block([paywall encodedDictionary], error);
         }
     }];
+#else
+    block(nil, nil);
+#endif
 }
 
 + (void)permissionsWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
