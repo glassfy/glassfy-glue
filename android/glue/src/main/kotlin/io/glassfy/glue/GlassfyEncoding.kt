@@ -1,12 +1,8 @@
 package io.glassfy.glue
 
 import io.glassfy.androidsdk.model.*
-import io.glassfy.androidsdk.paywall.Paywall
-import io.glassfy.androidsdk.paywall.PaywallType
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 fun encodeArray(array:List<JSONObject>): JSONArray {
     val all = JSONArray()
@@ -22,19 +18,6 @@ fun encodeStringArray(array:List<String>): JSONArray {
         all.put(it)
     }
     return all
-}
-
-fun Paywall.encodedJson(): JSONObject {
-    val jo = JSONObject()
-    jo.put("contentUrl", this.contentUrl)
-    jo.put("pwid", this.pwid)
-    jo.put("locale", this.locale)
-    jo.put("type", this.type.value.lowercase())
-    jo.put("config", this.config)
-
-    val skus = encodeArray(this.skus.map { it.encodedJson() })
-    jo.put("skus", skus)
-    return jo
 }
 
 fun Offering.encodedJson(): JSONObject {

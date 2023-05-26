@@ -25,12 +25,6 @@ interface Filter<T> {
 }
 
 object GlassfyGlue {
-    fun paywall(remoteConfig: String, callback: GlueCallback) {
-        Glassfy.paywall(remoteConfig) { paywall, error ->
-            callback(paywall?.encodedJson().toString(), error?.toString())
-        }
-    }
-
     fun sdkVersion(callback: GlueCallback) {
         val jo = JSONObject()
         jo.put("version", Glassfy.sdkVersion)
