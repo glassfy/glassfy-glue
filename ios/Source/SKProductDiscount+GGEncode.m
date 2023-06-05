@@ -15,7 +15,7 @@
     NSMutableDictionary *product = [[NSMutableDictionary alloc]init];
 
     if (@available(iOS 11.2, tvOS 11.2, macos 10.13.2, *)) {
-        product[@"price"] = @(self.price.doubleValue);
+        product[@"price"] = self.price;
         product[@"currencyCode"] = self.priceLocale.currencyCode;
         product[@"period"] = [SKProduct subscriptionPeriodISO8601:self.subscriptionPeriod];
         product[@"numberOfPeriods"] = @(self.numberOfPeriods);
