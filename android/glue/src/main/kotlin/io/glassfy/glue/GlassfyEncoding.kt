@@ -3,10 +3,8 @@ package io.glassfy.glue
 import io.glassfy.androidsdk.model.*
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
-fun encodeArray(array:List<JSONObject>):JSONArray {
+fun encodeArray(array:List<JSONObject>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -14,7 +12,7 @@ fun encodeArray(array:List<JSONObject>):JSONArray {
     return all
 }
 
-fun encodeStringArray(array:List<String>):JSONArray {
+fun encodeStringArray(array:List<String>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -146,13 +144,6 @@ fun Transaction.encodedJson(): JSONObject {
     return jo
 }
 
-fun skuFromJsonObject(jo: JSONObject):Sku {
-    val skuId = jo.optString("skuId")
-    val productId = jo.optString("productId")
-
-    return Sku(skuId,productId, emptyMap<String, String>(), null)
-}
-
 fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
     val joType = jo.optInt("type",-1)
 
@@ -160,17 +151,6 @@ fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
     val value = jo.optString("value")
 
     return if (type != null) AttributionItem(type, value) else null
-}
-
-fun attributionItemsFromJsonArray(ja: JSONArray): List<AttributionItem> {
-    val items = mutableListOf<AttributionItem>()
-    for (i in 0 until ja.length()) {
-        val jo = ja.getJSONObject(i)
-        attributionItemFromJsonObject(jo)?.let { item ->
-            items.add(item)
-        }
-    }
-    return items
 }
 
 fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
@@ -184,7 +164,7 @@ fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
         else -> null
     }
 
-fun SkuDetails.encodedJson():JSONObject{
+fun SkuDetails.encodedJson(): JSONObject{
     val jo = JSONObject()
 
     jo.put("identifier", this.sku)
@@ -218,7 +198,7 @@ fun SkuDetails.encodedJson():JSONObject{
     return jo;
 }
 
-fun UserProperties.encodedJson():JSONObject {
+fun UserProperties.encodedJson(): JSONObject {
     val jo = JSONObject()
     jo.put("email", this.email)
     jo.put("token", this.token)
