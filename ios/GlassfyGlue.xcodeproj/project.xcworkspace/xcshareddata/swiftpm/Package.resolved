@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Glassfy",
+        "repositoryURL": "https://github.com/glassfy/ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "fff920920656555fbd40137a2a9397edb46f96f1",
+          "version": "1.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

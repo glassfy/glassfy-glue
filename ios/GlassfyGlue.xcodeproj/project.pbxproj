@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		64307B162A2093750011894D /* GYSku+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 64307B152A2093750011894D /* GYSku+GGEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6486FDA12A0B947100A729BB /* Glassfy in Frameworks */ = {isa = PBXBuildFile; productRef = 6486FDA02A0B947100A729BB /* Glassfy */; };
+		64CDBC772A39F0AA000273C2 /* Glassfy in Frameworks */ = {isa = PBXBuildFile; productRef = 64CDBC762A39F0AA000273C2 /* Glassfy */; };
 		8118FF7C294B41F6009512BB /* GlassfyGlueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF56294B41E1009512BB /* GlassfyGlueTests.swift */; };
 		8118FF7D294B4216009512BB /* GYTransaction+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF5C294B41E1009512BB /* GYTransaction+GGEncode.m */; };
 		8118FF7E294B4216009512BB /* GYTransaction+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF6B294B41E1009512BB /* GYTransaction+GGEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		64307B152A2093750011894D /* GYSku+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYSku+GGEncode.h"; sourceTree = "<group>"; };
-		6486FD9E2A0B946500A729BB /* internal-ios-sdk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "internal-ios-sdk"; path = "../../internal-ios-sdk"; sourceTree = "<group>"; };
 		8118FF56294B41E1009512BB /* GlassfyGlueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassfyGlueTests.swift; sourceTree = "<group>"; };
 		8118FF57294B41E1009512BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8118FF59294B41E1009512BB /* SKPaymentDiscount+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SKPaymentDiscount+GGEncode.m"; sourceTree = "<group>"; };
@@ -101,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6486FDA12A0B947100A729BB /* Glassfy in Frameworks */,
+				64CDBC772A39F0AA000273C2 /* Glassfy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,14 +115,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6486FD9D2A0B946500A729BB /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				6486FD9E2A0B946500A729BB /* internal-ios-sdk */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		6486FD9F2A0B947100A729BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +182,6 @@
 		81AC1316294B419900C2C486 = {
 			isa = PBXGroup;
 			children = (
-				6486FD9D2A0B946500A729BB /* Packages */,
 				8118FF58294B41E1009512BB /* Source */,
 				8118FF55294B41E1009512BB /* Tests */,
 				81AC1321294B419A00C2C486 /* Products */,
@@ -253,7 +243,7 @@
 			);
 			name = GlassfyGlue;
 			packageProductDependencies = (
-				6486FDA02A0B947100A729BB /* Glassfy */,
+				64CDBC762A39F0AA000273C2 /* Glassfy */,
 			);
 			productName = GlassfyGlue;
 			productReference = 81AC1320294B419A00C2C486 /* GlassfyGlue.framework */;
@@ -304,6 +294,7 @@
 			);
 			mainGroup = 81AC1316294B419900C2C486;
 			packageReferences = (
+				64CDBC752A39F07A000273C2 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			productRefGroup = 81AC1321294B419A00C2C486 /* Products */;
 			projectDirPath = "";
@@ -607,9 +598,21 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		64CDBC752A39F07A000273C2 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/glassfy/ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		6486FDA02A0B947100A729BB /* Glassfy */ = {
+		64CDBC762A39F0AA000273C2 /* Glassfy */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 64CDBC752A39F07A000273C2 /* XCRemoteSwiftPackageReference "ios-sdk" */;
 			productName = Glassfy;
 		};
 /* End XCSwiftPackageProductDependency section */
