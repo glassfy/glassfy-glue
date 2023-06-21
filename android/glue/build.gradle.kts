@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("io.glassfy:androidsdk:1.4.0")
+    implementation("io.glassfy:androidsdk:1.5.0")
 }
 
 // Sources
