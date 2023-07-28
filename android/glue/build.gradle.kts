@@ -10,11 +10,11 @@ plugins {
 
 
 android {
+    namespace = "io.glassfy.glue"
     compileSdk = Configuration.compileSdk
 
     defaultConfig {
         minSdk = Configuration.minSdk
-        targetSdk = Configuration.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("io.glassfy:androidsdk:1.5.0")
+    api("io.glassfy:androidsdk:1.5.1")
 }
 
 // Sources
