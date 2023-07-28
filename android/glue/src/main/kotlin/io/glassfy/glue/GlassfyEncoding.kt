@@ -172,6 +172,7 @@ fun SkuDetails.encodedJson(): JSONObject{
     jo.put("title", this.title)
     jo.put("price", this.priceAmountMicro / 1000000.0)
     jo.put("currencyCode", this.priceCurrencyCode)
+    jo.put("period", this.subscriptionPeriod)
 
     if (this.freeTrialPeriod.isNotBlank()) {
         val ftjo = JSONObject()
@@ -186,9 +187,9 @@ fun SkuDetails.encodedJson(): JSONObject{
         jo.put("introductoryPrice",ftjo)
     } else if (introductoryPrice.isNotBlank()) {
         val ipjo = JSONObject()
-        ipjo.put("price",introductoryPriceAmountMicro / 1000000.0)
-        ipjo.put("period",introductoryPriceAmountPeriod)
-        ipjo.put("numberOfPeriods",introductoryPriceAmountCycles)
+        ipjo.put("price",this.introductoryPriceAmountMicro / 1000000.0)
+        ipjo.put("period",this.introductoryPriceAmountPeriod)
+        ipjo.put("numberOfPeriods",this.introductoryPriceAmountCycles)
         ipjo.put("type","introductory")
         ipjo.put("currencyCode", this.priceCurrencyCode)
         ipjo.put("identifier", this.sku)

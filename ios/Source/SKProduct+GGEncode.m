@@ -24,6 +24,7 @@
     product[@"title"] = self.localizedTitle ?: @"";
     product[@"price"] = @(self.price.floatValue);
     product[@"currencyCode"] = self.priceLocale.currencyCode ?: @"";
+    product[@"period"] = [SKProduct subscriptionPeriodISO8601:self.subscriptionPeriod];
 
     if (@available(iOS 11.2, tvOS 11.2, macos 10.13.2, *)) {
         if (self.introductoryPrice) {
@@ -43,6 +44,10 @@
 }
 
 + (NSString *)subscriptionPeriodISO8601 :(SKProductSubscriptionPeriod*)subscriptionPeriod API_AVAILABLE(ios(11.2), macos(10.13.2), tvos(11.2)) {
+    
+    if (subscriptionPeriod == nil) {
+        return @("");
+    }
     
     NSString *unit;
     switch (subscriptionPeriod.unit) {
