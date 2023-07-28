@@ -22,7 +22,7 @@
     product[@"identifier"] = self.productIdentifier ?: @"";
     product[@"description"] = self.localizedDescription ?: @"";
     product[@"title"] = self.localizedTitle ?: @"";
-    product[@"price"] = @(self.price.floatValue);
+    product[@"price"] = self.price;
     product[@"currencyCode"] = self.priceLocale.currencyCode ?: @"";
     product[@"period"] = [SKProduct subscriptionPeriodISO8601:self.subscriptionPeriod];
 

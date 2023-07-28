@@ -14,10 +14,10 @@
     NSMutableDictionary *sku = [super encodedDictionary];
     
     sku[@"name"] = self.name;
-    sku[@"initialPrice"] = @(self.initialPrice.floatValue);
+    sku[@"initialPrice"] = self.initialPrice;
     sku[@"initialPriceCode"] = self.initialPriceCode;
     sku[@"extravars"] = self.extravars;
-    sku[@"recurringPrice"] = @(self.recurringPrice.floatValue);
+    sku[@"recurringPrice"] = self.recurringPrice;
     sku[@"recurringPriceCode"] = self.recurringPriceCode;
     sku[@"extravars"] = self.extravars;
 
