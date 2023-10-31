@@ -2,25 +2,21 @@ package io.glassfy.glue
 
 
 import android.app.Activity
-import android.content.Context
 import io.glassfy.androidsdk.Glassfy
 import io.glassfy.androidsdk.Glassfy.sku
 import io.glassfy.androidsdk.GlassfyError
 import io.glassfy.androidsdk.LogLevel
 import io.glassfy.androidsdk.model.AttributionItem
-import io.glassfy.androidsdk.model.ProrationMode
-import io.glassfy.androidsdk.model.SubscriptionUpdate
+import io.glassfy.androidsdk.model.ReplacementMode
 import io.glassfy.androidsdk.model.Store
+import io.glassfy.androidsdk.model.SubscriptionUpdate
 import org.json.JSONObject
 
 typealias GlueCallback = (String?, String?) -> Unit
 
 interface Filter<T> {
     fun filterError(
-        result: T,
-        err: GlassfyError,
-        callback: GlueCallback,
-        processvalue: (T) -> String
+        result: T, err: GlassfyError, callback: GlueCallback, processvalue: (T) -> String
     )
 }
 
@@ -39,7 +35,7 @@ object GlassfyGlue {
         crossPlatformSdkVersion: String,
         callback: GlueCallback
     ) {
-        var options = Glassfy.InitializeOptions(ctx, apiKey)
+        val options = Glassfy.InitializeOptions(ctx, apiKey)
         options.watcherMode(watcherMode)
         options.crossPlatformSdkFramework(crossPlatformSdkFramework)
         options.crossPlatformSdkVersion(crossPlatformSdkVersion)
@@ -50,12 +46,9 @@ object GlassfyGlue {
     }
 
     fun setLogLevel(logLevel: Int) {
-        if (logLevel == 0)
-            Glassfy.setLogLevel(LogLevel.NONE)
-        else if (logLevel == 1)
-            Glassfy.setLogLevel(LogLevel.ERROR)
-        else if (logLevel >= 2)
-            Glassfy.setLogLevel(LogLevel.DEBUG)
+        if (logLevel == 0) Glassfy.setLogLevel(LogLevel.NONE)
+        else if (logLevel == 1) Glassfy.setLogLevel(LogLevel.ERROR)
+        else if (logLevel >= 2) Glassfy.setLogLevel(LogLevel.DEBUG)
     }
 
     fun offerings(callback: GlueCallback) {
@@ -159,7 +152,7 @@ object GlassfyGlue {
         activity: Activity,
         skuId: String,
         updateSkuId: String?,
-        updateSkuProration: Int?,
+        updateSkuReplacement: Int?,
         callback: GlueCallback
     ) {
         sku(skuId) { sku, skuerr ->
@@ -172,9 +165,9 @@ object GlassfyGlue {
             }
 
             val updateSku = updateSkuId?.let { s ->
-                updateSkuProration?.let {
+                updateSkuReplacement?.let {
                     try {
-                        ProrationMode.fromProrationModeValue(it)
+                        ReplacementMode.fromReplacementModeValue(it)
                     } catch (e: Exception) {
                         null
                     }
@@ -233,7 +226,7 @@ object GlassfyGlue {
                 return@getUserProperties
             }
             val extraEncode = extra.encodedJson()
-            callback(extraEncode.toString(), err?.toString())
+            callback(extraEncode.toString(), null)
         }
     }
 
