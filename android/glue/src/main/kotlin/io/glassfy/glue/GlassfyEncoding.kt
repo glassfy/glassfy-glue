@@ -126,11 +126,11 @@ fun Sku.encodedJson(): JSONObject {
     jo.put("product", productJo)
 
     if (productJo.has("introductoryPrice")) {
-        jo.put("introductoryEligibility", true)
+        jo.put("introductoryEligibility", 1)
     }
     productJo.optJSONArray("discounts")?.optJSONObject(0)?.let {
         jo.put("discount", it)
-        jo.put("promotionalEligibility", true)
+        jo.put("promotionalEligibility", 1)
     }
     return jo
 }
