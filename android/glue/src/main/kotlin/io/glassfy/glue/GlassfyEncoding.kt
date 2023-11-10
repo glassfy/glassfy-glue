@@ -230,7 +230,9 @@ fun SkuDetails.encodedJson(): JSONObject {
     if (ftjo != null) {
         jo.put("introductoryPrice", ftjo)
         if (ipjo != null) {
-            jo.put("discounts", JSONArray(ipjo))
+            val dja = JSONArray()
+            dja.put(ipjo);
+            jo.put("discounts", dja)
         }
     } else {
         jo.put("introductoryPrice", ipjo)
