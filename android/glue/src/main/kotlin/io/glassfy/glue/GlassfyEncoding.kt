@@ -1,10 +1,24 @@
 package io.glassfy.glue
 
-import io.glassfy.androidsdk.model.*
+import io.glassfy.androidsdk.model.AccountableSku
+import io.glassfy.androidsdk.model.AttributionItem
+import io.glassfy.androidsdk.model.ISkuBase
+import io.glassfy.androidsdk.model.Offering
+import io.glassfy.androidsdk.model.Offerings
+import io.glassfy.androidsdk.model.Permission
+import io.glassfy.androidsdk.model.Permissions
+import io.glassfy.androidsdk.model.PurchaseHistory
+import io.glassfy.androidsdk.model.PurchasesHistory
+import io.glassfy.androidsdk.model.Sku
+import io.glassfy.androidsdk.model.SkuBase
+import io.glassfy.androidsdk.model.SkuDetails
+import io.glassfy.androidsdk.model.SkuPaddle
+import io.glassfy.androidsdk.model.Transaction
+import io.glassfy.androidsdk.model.UserProperties
 import org.json.JSONArray
 import org.json.JSONObject
 
-fun encodeArray(array:List<JSONObject>): JSONArray {
+fun encodeArray(array: List<JSONObject>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -12,7 +26,7 @@ fun encodeArray(array:List<JSONObject>): JSONArray {
     return all
 }
 
-fun encodeStringArray(array:List<String>): JSONArray {
+fun encodeStringArray(array: List<String>): JSONArray {
     val all = JSONArray()
     array.forEach {
         all.put(it)
@@ -75,6 +89,8 @@ fun AccountableSku.encodedJson(): JSONObject {
     jo.put("store", this.store.value)
     jo.put("isInIntroOfferPeriod", this.isInIntroOfferPeriod)
     jo.put("isInTrialPeriod", this.isInTrialPeriod)
+    jo.put("basePlanId", this.basePlanId)
+    jo.put("offerId", this.offerId)
     return jo;
 }
 
@@ -84,15 +100,15 @@ fun Permission.encodedJson(): JSONObject {
     jo.put("entitlement", this.entitlement.value)
     jo.put("isValid", this.isValid)
     jo.put("expireDate", this.expireDate)
-    jo.put("accountableSkus",encodeArray(this.accountableSkus.map { it.encodedJson()}))
+    jo.put("accountableSkus", encodeArray(this.accountableSkus.map { it.encodedJson() }))
     return jo
 }
 
 fun Permissions.encodedJson(): JSONObject {
     val jo = JSONObject()
     val permissions = encodeArray(this.all.map { it.encodedJson() })
-    jo.put("subscriberId",subscriberId)
-    jo.put("all",permissions)
+    jo.put("subscriberId", subscriberId)
+    jo.put("all", permissions)
     return jo
 }
 
@@ -100,9 +116,22 @@ fun Sku.encodedJson(): JSONObject {
     val jo = JSONObject()
     jo.put("skuId", this.skuId)
     jo.put("productId", this.productId)
+    jo.put("basePlanId", this.basePlanId)
+    jo.put("offerId", this.offerId)
+
     jo.put("store", this.store.value)
-    jo.put("extravars",JSONObject(this.extravars))
-    jo.put("product", this.product.encodedJson())
+    jo.put("extravars", JSONObject(this.extravars))
+
+    val productJo = this.product.encodedJson()
+    jo.put("product", productJo)
+
+    if (productJo.has("introductoryPrice")) {
+        jo.put("introductoryEligibility", true)
+    }
+    productJo.optJSONArray("discounts")?.optJSONObject(0)?.let {
+        jo.put("discount", it)
+        jo.put("promotionalEligibility", true)
+    }
     return jo
 }
 
@@ -145,7 +174,7 @@ fun Transaction.encodedJson(): JSONObject {
 }
 
 fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
-    val joType = jo.optInt("type",-1)
+    val joType = jo.optInt("type", -1)
 
     val type = attributionItemTypeFromValue(joType)
     val value = jo.optString("value")
@@ -153,18 +182,17 @@ fun attributionItemFromJsonObject(jo: JSONObject): AttributionItem? {
     return if (type != null) AttributionItem(type, value) else null
 }
 
-fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? =
-    when (value) {
-        1 -> AttributionItem.Type.AdjustID
-        2 -> AttributionItem.Type.AppsFlyerID
-        3 -> AttributionItem.Type.IP
-        6 -> AttributionItem.Type.GAID
-        7 -> AttributionItem.Type.ASID
-        8 -> AttributionItem.Type.AID
-        else -> null
-    }
+fun attributionItemTypeFromValue(value: Int): AttributionItem.Type? = when (value) {
+    1 -> AttributionItem.Type.AdjustID
+    2 -> AttributionItem.Type.AppsFlyerID
+    3 -> AttributionItem.Type.IP
+    6 -> AttributionItem.Type.GAID
+    7 -> AttributionItem.Type.ASID
+    8 -> AttributionItem.Type.AID
+    else -> null
+}
 
-fun SkuDetails.encodedJson(): JSONObject{
+fun SkuDetails.encodedJson(): JSONObject {
     val jo = JSONObject()
 
     jo.put("identifier", this.sku)
@@ -173,30 +201,42 @@ fun SkuDetails.encodedJson(): JSONObject{
     jo.put("price", this.priceAmountMicro / 1000000.0)
     jo.put("currencyCode", this.priceCurrencyCode)
     jo.put("period", this.subscriptionPeriod)
+    jo.put("basePlanId", this.basePlanId)
 
+    var ftjo: JSONObject? = null
     if (this.freeTrialPeriod.isNotBlank()) {
-        val ftjo = JSONObject()
+        ftjo = JSONObject()
 
-        ftjo.put("price",0)
+        ftjo.put("price", 0)
         ftjo.put("period", this.freeTrialPeriod)
-        ftjo.put("numberOfPeriods",1)
-        ftjo.put("type","introductory")
+        ftjo.put("numberOfPeriods", 1)
+        ftjo.put("type", "introductory")
         ftjo.put("currencyCode", this.priceCurrencyCode)
-        ftjo.put("identifier", this.sku)
-
-        jo.put("introductoryPrice",ftjo)
-    } else if (introductoryPrice.isNotBlank()) {
-        val ipjo = JSONObject()
-        ipjo.put("price",this.introductoryPriceAmountMicro / 1000000.0)
-        ipjo.put("period",this.introductoryPriceAmountPeriod)
-        ipjo.put("numberOfPeriods",this.introductoryPriceAmountCycles)
-        ipjo.put("type","introductory")
-        ipjo.put("currencyCode", this.priceCurrencyCode)
-        ipjo.put("identifier", this.sku)
-
-        jo.put("introductoryPrice",ipjo)
+        ftjo.put("identifier", this.offerId)
     }
-    return jo;
+
+    var ipjo: JSONObject? = null
+    if (introductoryPrice.isNotBlank()) {
+        ipjo = JSONObject()
+
+        ipjo.put("price", this.introductoryPriceAmountMicro / 1000000.0)
+        ipjo.put("period", this.introductoryPriceAmountPeriod)
+        ipjo.put("numberOfPeriods", this.introductoryPriceAmountCycles)
+        ipjo.put("type", "introductory")
+        ipjo.put("currencyCode", this.priceCurrencyCode)
+        ipjo.put("identifier", this.offerId)
+    }
+
+    if (ftjo != null) {
+        jo.put("introductoryPrice", ftjo)
+        if (ipjo != null) {
+            jo.put("discounts", JSONArray(ipjo))
+        }
+    } else {
+        jo.put("introductoryPrice", ipjo)
+    }
+
+    return jo
 }
 
 fun UserProperties.encodedJson(): JSONObject {
