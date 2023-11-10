@@ -40,6 +40,10 @@
         product[@"discounts"] = allDiscounts;
     }
     
+    if (@available(iOS 12.0, tvOS 12.0, macos 10.14, *)) {
+        product[@"subscriptionGroupIdentifier"] = self.subscriptionGroupIdentifier;
+    }
+
     return product;
 }
 
