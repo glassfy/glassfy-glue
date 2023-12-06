@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		64307B162A2093750011894D /* GYSku+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 64307B152A2093750011894D /* GYSku+GGEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64CDBC772A39F0AA000273C2 /* Glassfy in Frameworks */ = {isa = PBXBuildFile; productRef = 64CDBC762A39F0AA000273C2 /* Glassfy */; };
 		8118FF7C294B41F6009512BB /* GlassfyGlueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF56294B41E1009512BB /* GlassfyGlueTests.swift */; };
 		8118FF7D294B4216009512BB /* GYTransaction+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF5C294B41E1009512BB /* GYTransaction+GGEncode.m */; };
-		8118FF7E294B4216009512BB /* GYTransaction+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF6B294B41E1009512BB /* GYTransaction+GGEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8118FF7F294B4216009512BB /* GYOfferings+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF77294B41E1009512BB /* GYOfferings+GGEncode.h */; };
 		8118FF80294B4216009512BB /* GYUserProperties+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF66294B41E1009512BB /* GYUserProperties+GGEncode.h */; };
 		8118FF81294B4216009512BB /* GYOffering+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF67294B41E1009512BB /* GYOffering+GGEncode.h */; };
@@ -37,13 +35,15 @@
 		8118FF96294B4216009512BB /* SKProduct+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF78294B41E1009512BB /* SKProduct+GGEncode.h */; };
 		8118FF97294B4216009512BB /* GYStoreInfo+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF63294B41E1009512BB /* GYStoreInfo+GGEncode.h */; };
 		8118FF98294B4216009512BB /* GYPermission+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF64294B41E1009512BB /* GYPermission+GGEncode.h */; };
-		8118FF99294B4216009512BB /* GGCodableProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF69294B41E1009512BB /* GGCodableProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8118FF99294B4216009512BB /* GGCodableProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF69294B41E1009512BB /* GGCodableProtocol.h */; };
 		8118FF9A294B4216009512BB /* GYStoresInfo+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF74294B41E1009512BB /* GYStoresInfo+GGEncode.h */; };
 		8118FF9B294B4216009512BB /* GYStoreInfo+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF76294B41E1009512BB /* GYStoreInfo+GGEncode.m */; };
 		8118FF9C294B4216009512BB /* SKProductDiscount+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF71294B41E1009512BB /* SKProductDiscount+GGEncode.m */; };
 		8118FF9D294B421B009512BB /* GlassfyGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF6E294B41E1009512BB /* GlassfyGlue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		811BB6FD2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB6FB2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h */; };
 		811BB6FE2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */; };
+		811E2E622B20C740001D0BF2 /* GYSku+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 811E2E612B20C740001D0BF2 /* GYSku+GGEncode.h */; };
+		811E2E642B20C759001D0BF2 /* GYTransaction+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 811E2E632B20C759001D0BF2 /* GYTransaction+GGEncode.h */; };
 		81AC1329294B419A00C2C486 /* GlassfyGlue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AC1320294B419A00C2C486 /* GlassfyGlue.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		64307B152A2093750011894D /* GYSku+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYSku+GGEncode.h"; sourceTree = "<group>"; };
 		8118FF56294B41E1009512BB /* GlassfyGlueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassfyGlueTests.swift; sourceTree = "<group>"; };
 		8118FF57294B41E1009512BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8118FF59294B41E1009512BB /* SKPaymentDiscount+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SKPaymentDiscount+GGEncode.m"; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		8118FF68294B41E1009512BB /* SKProduct+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+GGEncode.m"; sourceTree = "<group>"; };
 		8118FF69294B41E1009512BB /* GGCodableProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GGCodableProtocol.h; sourceTree = "<group>"; };
 		8118FF6A294B41E1009512BB /* GYPermissions+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GYPermissions+GGEncode.m"; sourceTree = "<group>"; };
-		8118FF6B294B41E1009512BB /* GYTransaction+GGEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GYTransaction+GGEncode.h"; sourceTree = "<group>"; };
 		8118FF6C294B41E1009512BB /* GYSkuBase+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GYSkuBase+GGEncode.m"; sourceTree = "<group>"; };
 		8118FF6E294B41E1009512BB /* GlassfyGlue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlassfyGlue.h; sourceTree = "<group>"; };
 		8118FF6F294B41E1009512BB /* GYAccountableSku+GGEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GYAccountableSku+GGEncode.h"; sourceTree = "<group>"; };
@@ -95,6 +93,8 @@
 		8118FF7A294B41E1009512BB /* GYUserProperties+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GYUserProperties+GGEncode.m"; sourceTree = "<group>"; };
 		811BB6FB2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYStoreInfoPaddle+GGEncode.h"; sourceTree = "<group>"; };
 		811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GYStoreInfoPaddle+GGEncode.m"; sourceTree = "<group>"; };
+		811E2E612B20C740001D0BF2 /* GYSku+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYSku+GGEncode.h"; sourceTree = "<group>"; };
+		811E2E632B20C759001D0BF2 /* GYTransaction+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYTransaction+GGEncode.h"; sourceTree = "<group>"; };
 		81AC1320294B419A00C2C486 /* GlassfyGlue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlassfyGlue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AC1328294B419A00C2C486 /* GlassfyGlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlassfyGlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -150,6 +150,7 @@
 				8118FF75294B41E1009512BB /* GYPermission+GGEncode.m */,
 				8118FF5D294B41E1009512BB /* GYPermissions+GGEncode.h */,
 				8118FF6A294B41E1009512BB /* GYPermissions+GGEncode.m */,
+				811E2E612B20C740001D0BF2 /* GYSku+GGEncode.h */,
 				8118FF5E294B41E1009512BB /* GYSku+GGEncode.m */,
 				8118FF5B294B41E1009512BB /* GYSkuBase+GGEncode.h */,
 				8118FF6C294B41E1009512BB /* GYSkuBase+GGEncode.m */,
@@ -161,6 +162,7 @@
 				811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */,
 				8118FF74294B41E1009512BB /* GYStoresInfo+GGEncode.h */,
 				8118FF65294B41E1009512BB /* GYStoresInfo+GGEncode.m */,
+				811E2E632B20C759001D0BF2 /* GYTransaction+GGEncode.h */,
 				8118FF5C294B41E1009512BB /* GYTransaction+GGEncode.m */,
 				8118FF66294B41E1009512BB /* GYUserProperties+GGEncode.h */,
 				8118FF7A294B41E1009512BB /* GYUserProperties+GGEncode.m */,
@@ -170,6 +172,7 @@
 				8118FF68294B41E1009512BB /* SKProduct+GGEncode.m */,
 				8118FF61294B41E1009512BB /* SKProductDiscount+GGEncode.h */,
 				8118FF71294B41E1009512BB /* SKProductDiscount+GGEncode.m */,
+				8118FF69294B41E1009512BB /* GGCodableProtocol.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -177,10 +180,7 @@
 		8118FF6D294B41E1009512BB /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8118FF69294B41E1009512BB /* GGCodableProtocol.h */,
 				8118FF6E294B41E1009512BB /* GlassfyGlue.h */,
-				64307B152A2093750011894D /* GYSku+GGEncode.h */,
-				8118FF6B294B41E1009512BB /* GYTransaction+GGEncode.h */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -211,6 +211,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811E2E622B20C740001D0BF2 /* GYSku+GGEncode.h in Headers */,
 				8118FF9A294B4216009512BB /* GYStoresInfo+GGEncode.h in Headers */,
 				8118FF8F294B4216009512BB /* SKPaymentDiscount+GGEncode.h in Headers */,
 				8118FF90294B4216009512BB /* SKProductDiscount+GGEncode.h in Headers */,
@@ -219,13 +220,12 @@
 				8118FF89294B4216009512BB /* GYSkuBase+GGEncode.h in Headers */,
 				8118FF7F294B4216009512BB /* GYOfferings+GGEncode.h in Headers */,
 				8118FF80294B4216009512BB /* GYUserProperties+GGEncode.h in Headers */,
-				64307B162A2093750011894D /* GYSku+GGEncode.h in Headers */,
 				8118FF81294B4216009512BB /* GYOffering+GGEncode.h in Headers */,
+				811E2E642B20C759001D0BF2 /* GYTransaction+GGEncode.h in Headers */,
 				8118FF96294B4216009512BB /* SKProduct+GGEncode.h in Headers */,
 				8118FF9D294B421B009512BB /* GlassfyGlue.h in Headers */,
 				8118FF97294B4216009512BB /* GYStoreInfo+GGEncode.h in Headers */,
 				8118FF87294B4216009512BB /* GYPermissions+GGEncode.h in Headers */,
-				8118FF7E294B4216009512BB /* GYTransaction+GGEncode.h in Headers */,
 				8118FF85294B4216009512BB /* GYSkuPaddle+GGEncode.h in Headers */,
 				811BB6FD2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h in Headers */,
 				8118FF98294B4216009512BB /* GYPermission+GGEncode.h in Headers */,

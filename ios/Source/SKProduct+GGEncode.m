@@ -18,19 +18,20 @@
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     formatter.locale = self.priceLocale;
     
-    
     product[@"identifier"] = self.productIdentifier ?: @"";
     product[@"description"] = self.localizedDescription ?: @"";
     product[@"title"] = self.localizedTitle ?: @"";
     product[@"price"] = self.price;
     product[@"currencyCode"] = self.priceLocale.currencyCode ?: @"";
-    product[@"period"] = [SKProduct subscriptionPeriodISO8601:self.subscriptionPeriod];
-
+    
+    NSString *formattedSubscriptionPeriod = @"";
     if (@available(iOS 11.2, tvOS 11.2, macos 10.13.2, *)) {
+        formattedSubscriptionPeriod = [SKProduct subscriptionPeriodISO8601:self.subscriptionPeriod];
         if (self.introductoryPrice) {
             product[@"introductoryPrice"] = [self.introductoryPrice encodedDictionary];
         }
     }
+    product[@"period"] = formattedSubscriptionPeriod;
         
     if (@available(iOS 12.2, tvOS 12.2, macos 10.14.4, *)) {
         NSMutableArray *allDiscounts= [NSMutableArray new];
