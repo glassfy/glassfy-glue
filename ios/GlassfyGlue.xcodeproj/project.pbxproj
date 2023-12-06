@@ -42,6 +42,8 @@
 		8118FF9B294B4216009512BB /* GYStoreInfo+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF76294B41E1009512BB /* GYStoreInfo+GGEncode.m */; };
 		8118FF9C294B4216009512BB /* SKProductDiscount+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8118FF71294B41E1009512BB /* SKProductDiscount+GGEncode.m */; };
 		8118FF9D294B421B009512BB /* GlassfyGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8118FF6E294B41E1009512BB /* GlassfyGlue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		811BB6FD2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 811BB6FB2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h */; };
+		811BB6FE2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */; };
 		81AC1329294B419A00C2C486 /* GlassfyGlue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AC1320294B419A00C2C486 /* GlassfyGlue.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,8 @@
 		8118FF78294B41E1009512BB /* SKProduct+GGEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKProduct+GGEncode.h"; sourceTree = "<group>"; };
 		8118FF79294B41E1009512BB /* GYOffering+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GYOffering+GGEncode.m"; sourceTree = "<group>"; };
 		8118FF7A294B41E1009512BB /* GYUserProperties+GGEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GYUserProperties+GGEncode.m"; sourceTree = "<group>"; };
+		811BB6FB2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GYStoreInfoPaddle+GGEncode.h"; sourceTree = "<group>"; };
+		811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GYStoreInfoPaddle+GGEncode.m"; sourceTree = "<group>"; };
 		81AC1320294B419A00C2C486 /* GlassfyGlue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlassfyGlue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AC1328294B419A00C2C486 /* GlassfyGlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlassfyGlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -153,6 +157,8 @@
 				8118FF60294B41E1009512BB /* GYSkuPaddle+GGEncode.m */,
 				8118FF63294B41E1009512BB /* GYStoreInfo+GGEncode.h */,
 				8118FF76294B41E1009512BB /* GYStoreInfo+GGEncode.m */,
+				811BB6FB2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h */,
+				811BB6FC2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m */,
 				8118FF74294B41E1009512BB /* GYStoresInfo+GGEncode.h */,
 				8118FF65294B41E1009512BB /* GYStoresInfo+GGEncode.m */,
 				8118FF5C294B41E1009512BB /* GYTransaction+GGEncode.m */,
@@ -221,6 +227,7 @@
 				8118FF87294B4216009512BB /* GYPermissions+GGEncode.h in Headers */,
 				8118FF7E294B4216009512BB /* GYTransaction+GGEncode.h in Headers */,
 				8118FF85294B4216009512BB /* GYSkuPaddle+GGEncode.h in Headers */,
+				811BB6FD2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.h in Headers */,
 				8118FF98294B4216009512BB /* GYPermission+GGEncode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +347,7 @@
 				8118FF83294B4216009512BB /* GYSku+GGEncode.m in Sources */,
 				8118FF93294B4216009512BB /* GYStoresInfo+GGEncode.m in Sources */,
 				8118FF88294B4216009512BB /* GYPermissions+GGEncode.m in Sources */,
+				811BB6FE2B20B37300340CEB /* GYStoreInfoPaddle+GGEncode.m in Sources */,
 				8118FF7D294B4216009512BB /* GYTransaction+GGEncode.m in Sources */,
 				8118FF91294B4216009512BB /* GYAccountableSku+GGEncode.m in Sources */,
 				8118FF92294B4216009512BB /* GlassfyGlue.m in Sources */,
