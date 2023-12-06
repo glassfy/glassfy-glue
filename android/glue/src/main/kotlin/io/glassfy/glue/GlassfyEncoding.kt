@@ -13,6 +13,9 @@ import io.glassfy.androidsdk.model.Sku
 import io.glassfy.androidsdk.model.SkuBase
 import io.glassfy.androidsdk.model.SkuDetails
 import io.glassfy.androidsdk.model.SkuPaddle
+import io.glassfy.androidsdk.model.StoreInfo
+import io.glassfy.androidsdk.model.StoreInfoPaddle
+import io.glassfy.androidsdk.model.StoresInfo
 import io.glassfy.androidsdk.model.Transaction
 import io.glassfy.androidsdk.model.UserProperties
 import org.json.JSONArray
@@ -165,6 +168,38 @@ fun ISkuBase.encodedJson(): JSONObject {
     jo.put("productId", this.productId)
     jo.put("store", this.store.value)
     return jo;
+}
+
+fun StoresInfo.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    val all = encodeArray(this.all.map {
+        when (it) {
+            is StoreInfoPaddle-> it.encodedJson()
+            else -> it.encodedJson()
+        }
+    })
+    jo.put("all", all)
+    return jo
+}
+
+fun StoreInfo.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    jo.put("store", this.store.value)
+    jo.put("rawInfo", this.rawData)
+    return jo
+}
+
+fun StoreInfoPaddle.encodedJson(): JSONObject {
+    val jo = JSONObject()
+    jo.put("store", this.store.value)
+    jo.put("rawInfo", this.rawData)
+    jo.put("userid", this.userId)
+    jo.put("planId", this.planId)
+    jo.put("subscriptionId", this.subscriptionId)
+    jo.put("updateURL", this.updateURL?.toString())
+    jo.put("cancelURL", this.cancelURL?.toString())
+
+    return jo
 }
 
 fun Transaction.encodedJson(): JSONObject {

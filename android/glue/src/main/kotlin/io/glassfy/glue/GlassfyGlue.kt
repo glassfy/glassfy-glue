@@ -204,6 +204,18 @@ object GlassfyGlue {
         }
     }
 
+    fun storeInfo(callback: GlueCallback) {
+        Glassfy.storeInfo { info, err ->
+            if (err != null) {
+                callback(null, err.toString())
+            } else if (info == null) {
+                callback(null, "InternalError")
+            } else {
+                callback(info.encodedJson().toString(), null)
+            }
+        }
+    }
+
     fun setEmailUserProperty(email: String, callback: GlueCallback) {
         Glassfy.setEmailUserProperty(email) { err ->
             callback(null, err?.toString())
