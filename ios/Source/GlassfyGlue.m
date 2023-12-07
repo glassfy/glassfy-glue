@@ -268,13 +268,13 @@
     }];
 }
 
-+ (void)storeInfo:(GlassfyGlueCompletion _Nonnull)block {
-    [Glassfy storeInfo:^(GYStoresInfo *storeInfo, NSError *error) {
++ (void)storeInfoWithCompletion:(GlassfyGlueCompletion _Nonnull)block {
+    [Glassfy storeInfo:^(GYStoresInfo *info, NSError *error) {
         if (error != nil) {
             block(nil, error);
             return;
         }
-        NSDictionary *infoStoreDict = [storeInfo encodedDictionary];
+        NSDictionary *infoStoreDict = [info encodedDictionary];
         block(infoStoreDict, nil);
     }];
 }

@@ -73,7 +73,7 @@ typedef void (^GlassfyGlueCompletion)(NSDictionary<NSString *, id> *_Nullable, N
 + (void)connectCustomSubscriber:(NSString *_Nullable)customId
                      completion:(GlassfyGlueCompletion _Nonnull)block;
 
-+ (void)storeInfo:(GlassfyGlueCompletion _Nonnull)block;
++ (void)storeInfoWithCompletion:(GlassfyGlueCompletion _Nonnull)block;
 
 + (void)setPurchaseDelegate:(id<GlassfyGluePurchaseDelegate> _Nullable)delegate;
 
