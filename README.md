@@ -16,7 +16,7 @@ GlassfyGlue is available through [CocoaPods](https://cocoapods.org) and [Maven C
 Add the following line to your Podfile:
 
 ```ruby
-pod 'GlassfyGlue', '~> 1.4.2'
+pod 'GlassfyGlue', '~> 1.4.3'
 ```
 
 ### Install on android
